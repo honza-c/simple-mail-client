@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    UserAccount account("foo@foo", "pass", "smtp://foo");
+    account.printToConsole();
+
 }
 
 MainWindow::~MainWindow()
