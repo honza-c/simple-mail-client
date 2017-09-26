@@ -1,5 +1,6 @@
 #include <QString>
 #include <QtTest>
+#include <userAccounts/useraccount.h>
 
 class MailClientTestTest : public QObject
 {
@@ -18,7 +19,10 @@ MailClientTestTest::MailClientTestTest()
 
 void MailClientTestTest::testCase1()
 {
-    QVERIFY2(true, "Failure");
+    UserAccount account("foo@foo", "pass", "smtp://foo");
+    QString emailAddress = account.getEmailAddress();
+
+    QVERIFY2(emailAddress == QString("foo@foo"), "Error in getter UserAccount.getEmailAddress()");
 }
 
 QTEST_APPLESS_MAIN(MailClientTestTest)

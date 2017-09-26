@@ -30,3 +30,6 @@ SOURCES += \
         tst_mailclienttesttest.cpp 
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+INCLUDEPATH += $$PWD/../mail-client-core
+LIBS += -L$$OUT_PWD/../mail-client-core/ -lmail-client-core
