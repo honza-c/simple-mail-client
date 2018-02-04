@@ -8,8 +8,8 @@ class UserAccount : public QObject
 {
     Q_OBJECT
 public:
-    explicit UserAccount() {}
-    explicit UserAccount(const UserAccount &other);
+    UserAccount() {}
+    UserAccount(const UserAccount &other);
     UserAccount &operator=(const UserAccount &other);
     operator QString() const;
 
