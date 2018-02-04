@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditUserAccountDialog</class>
+ <widget class="QDialog" name="EditUserAccountDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>322</width>
+    <height>383</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Add / Edit Account</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>32</y>
+     <width>277</width>
+     <height>308</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="lblAccountName">
+          <property name="text">
+           <string>Account name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblYourName">
+          <property name="text">
+           <string>Your name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblEmailAddress">
+          <property name="text">
+           <string>Email address</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblSmtpServerAddress">
+          <property name="text">
+           <string>SMTP server address</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblPopServerPort">
+          <property name="text">
+           <string>SMTP server port</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblPopServerAddress">
+          <property name="text">
+           <string>POP3 server address</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblSmtpServerPort">
+          <property name="text">
+           <string>POP3 server port</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblPassword">
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="editAccountName"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editYourName"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editEmailAddress"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editSmtpServerUrl"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editSmtpServerPort"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editPopServerUrl"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editPopServerPort"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="editPassword"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btnCancel">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

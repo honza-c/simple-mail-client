@@ -26,12 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    manageaccountsdialog.cpp \
+    edituseraccountdialog.cpp
 
 HEADERS += \
         mainwindow.h \
+    manageaccountsdialog.h \
+    edituseraccountdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    manageaccountsdialog.ui \
+    edituseraccountdialog.ui
 
 INCLUDEPATH += $$PWD/../mail-client-core
 LIBS += -L$$OUT_PWD/../mail-client-core/ -lmail-client-core

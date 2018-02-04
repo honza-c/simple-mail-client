@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <userAccounts/useraccount.h>
 #include <QDebug>
+#include "manageaccountsdialog.h"
+#include "edituseraccountdialog.h"
 
 namespace Ui {
 class MainWindow;
