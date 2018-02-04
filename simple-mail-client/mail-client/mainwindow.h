@@ -6,6 +6,7 @@
 #include <QDebug>
 #include "manageaccountsdialog.h"
 #include "edituseraccountdialog.h"
+#include "writemessagewindow.h"
 
 namespace Ui {
 class MainWindow;

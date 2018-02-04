@@ -27,17 +27,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     manageaccountsdialog.cpp \
-    edituseraccountdialog.cpp
+    edituseraccountdialog.cpp \
+    writemessagewindow.cpp
 
 HEADERS += \
         mainwindow.h \
     manageaccountsdialog.h \
-    edituseraccountdialog.h
+    edituseraccountdialog.h \
+    writemessagewindow.h
 
 FORMS += \
         mainwindow.ui \
     manageaccountsdialog.ui \
-    edituseraccountdialog.ui
+    edituseraccountdialog.ui \
+    writemessagewindow.ui
 
 INCLUDEPATH += $$PWD/../mail-client-core
 LIBS += -L$$OUT_PWD/../mail-client-core/ -lmail-client-core
