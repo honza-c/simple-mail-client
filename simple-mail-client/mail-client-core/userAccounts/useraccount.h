@@ -8,22 +8,38 @@ class UserAccount : public QObject
 {
     Q_OBJECT
 public:
-    explicit UserAccount(QString emailAddress, QString password, QString smtpUrl, QObject *parent = nullptr);
+    explicit UserAccount() {}
+    explicit UserAccount(const UserAccount &other);
+    UserAccount &operator=(const UserAccount &other);
+    operator QString() const;
 
+    void setAccountName(QString accountName);
+    void setYourName(QString yourName);
     void setEmailAddress(QString emailAddress);
     void setPassword(QString password);
-    void setSmtpUrl(QString smtpUrl);
+    void setSmtpServerUrl(QString smtpServerUrl);
+    void setPopServerUrl(QString popServerUrl);
+    void setSmtpServerPort(int smtpServerPort);
+    void setPopServerPort(int popServerPort);
 
+    QString getAccountName();
+    QString getYourName();
     QString getEmailAddress();
     QString getPassword();
-    QString getSmtpUrl();
-
-    void printToConsole();
+    QString getSmtpServerUrl();
+    QString getPopServerUrl();
+    int getSmtpServerPort();
+    int getPopServerPort();
 
 private:
+    QString accountName;
+    QString yourName;
     QString emailAddress;
     QString password;
-    QString smtpUrl;
+    QString smtpServerUrl;
+    QString popServerUrl;
+    int smtpServerPort;
+    int popServerPort;
 
 signals:
 
