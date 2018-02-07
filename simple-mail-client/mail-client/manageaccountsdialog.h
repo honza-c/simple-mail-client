@@ -2,6 +2,8 @@
 #define MANAGEACCOUNTSDIALOG_H
 
 #include <QDialog>
+#include <userAccounts/useraccount.h>
+#include <userAccounts/useraccountslistmodel.h>
 
 namespace Ui {
 class ManageAccountsDialog;
@@ -12,7 +14,7 @@ class ManageAccountsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ManageAccountsDialog(QWidget *parent = 0);
+    explicit ManageAccountsDialog(UserAccountsListModel *model, QWidget *parent = 0);
     ~ManageAccountsDialog();
 
 private slots:
@@ -20,6 +22,7 @@ private slots:
 
 private:
     Ui::ManageAccountsDialog *ui;
+    UserAccountsListModel *model;
 };
 
 #endif // MANAGEACCOUNTSDIALOG_H

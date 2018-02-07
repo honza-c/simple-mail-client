@@ -6,8 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    initializeStructures();
     createTestUserAccounts();
+    initializeStructures();
+
 }
 
 MainWindow::~MainWindow()
@@ -18,8 +19,8 @@ MainWindow::~MainWindow()
 void MainWindow::initializeStructures()
 {
     usersModel = new UserAccountsListModel(users);
-    manageAccountsDialog = new ManageAccountsDialog;
-    writeMessageWindow = new WriteMessageWindow;
+    manageAccountsDialog = new ManageAccountsDialog(usersModel);
+    writeMessageWindow = new WriteMessageWindow(usersModel);
 }
 
 void MainWindow::createTestUserAccounts()
