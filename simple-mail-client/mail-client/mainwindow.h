@@ -7,7 +7,7 @@
 #include <QtWidgets>
 #include "manageaccountsdialog.h"
 #include "writemessagewindow.h"
-#include "useraccountslistmodel.h"
+#include <userAccounts/useraccountslistmodel.h>
 
 namespace Ui {
 class MainWindow;

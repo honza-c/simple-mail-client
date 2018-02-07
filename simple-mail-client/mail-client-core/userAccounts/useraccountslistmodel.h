@@ -2,7 +2,7 @@
 #define USERACCOUNTSLISTMODEL_H
 
 #include <QtWidgets>
-#include "userAccounts/useraccount.h"
+#include "useraccount.h"
 
 class UserAccountsListModel : public QAbstractListModel
 {

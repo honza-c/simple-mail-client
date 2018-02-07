@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = mail-client-core
 TEMPLATE = lib
@@ -23,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         mailclientcore.cpp \
-        userAccounts/useraccount.cpp
+        userAccounts/useraccount.cpp \
+        userAccounts/useraccountslistmodel.cpp
 
 HEADERS += \
         mailclientcore.h \
-        userAccounts/useraccount.h
+        userAccounts/useraccount.h \
+        userAccounts/useraccountslistmodel.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

@@ -29,14 +29,14 @@ SOURCES += \
     manageaccountsdialog.cpp \
     edituseraccountdialog.cpp \
     writemessagewindow.cpp \
-    useraccountslistmodel.cpp
+
 
 HEADERS += \
         mainwindow.h \
     manageaccountsdialog.h \
     edituseraccountdialog.h \
     writemessagewindow.h \
-    useraccountslistmodel.h
+
 
 FORMS += \
         mainwindow.ui \
