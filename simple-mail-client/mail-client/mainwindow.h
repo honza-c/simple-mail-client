@@ -6,7 +6,6 @@
 #include <QDebug>
 #include <QtWidgets>
 #include "manageaccountsdialog.h"
-#include "edituseraccountdialog.h"
 #include "writemessagewindow.h"
 #include "useraccountslistmodel.h"
 
@@ -22,6 +21,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionAccount_Settings_triggered();
+
+    void on_actionNew_Message_triggered();
+
 private:
     void initializeStructures();
     void createTestUserAccounts();
@@ -29,6 +33,9 @@ private:
     Ui::MainWindow *ui;
     QList<UserAccount> users;
     UserAccountsListModel *usersModel;
+
+    ManageAccountsDialog *manageAccountsDialog;
+    WriteMessageWindow *writeMessageWindow;
 };
 
 #endif // MAINWINDOW_H

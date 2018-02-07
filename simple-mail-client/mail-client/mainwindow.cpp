@@ -18,6 +18,8 @@ MainWindow::~MainWindow()
 void MainWindow::initializeStructures()
 {
     usersModel = new UserAccountsListModel(users);
+    manageAccountsDialog = new ManageAccountsDialog;
+    writeMessageWindow = new WriteMessageWindow;
 }
 
 void MainWindow::createTestUserAccounts()
@@ -53,4 +55,14 @@ void MainWindow::createTestUserAccounts()
     u3.setPopServerPort(999);
 
     users << u1 << u2 << u3;
+}
+
+void MainWindow::on_actionAccount_Settings_triggered()
+{
+    manageAccountsDialog->show();
+}
+
+void MainWindow::on_actionNew_Message_triggered()
+{
+    writeMessageWindow->show();
 }
