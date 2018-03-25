@@ -27,3 +27,69 @@ QVariant UserAccountsListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 }
+
+QList<UserAccount> UserAccountsListModel::getUserAccountList()
+{
+    return this->users;
+}
+
+void UserAccountsListModel::addNewUserAccount(UserAccount *account)
+{
+    int count = users.length();
+
+    QList<UserAccount*> newUsers;
+    newUsers.push_back(account);
+
+    insertRows(count, 1, QModelIndex(), newUsers);
+}
+
+void UserAccountsListModel::editSelectedUserAccount(QModelIndex index, UserAccount *account)
+{
+    beginResetModel();
+
+    users.replace(index.row(), *account);
+
+    endResetModel();
+}
+
+void UserAccountsListModel::removeSelectedUserAccount(QModelIndex index)
+{
+    qDebug() << "budeme mazat";
+    removeRows(index.row(), 1, QModelIndex());
+    qDebug() << "hotovo";
+}
+
+bool UserAccountsListModel::insertRows(int position, int rows, const QModelIndex &parent, QList<UserAccount*> newUsers)
+{
+    beginInsertRows(parent, position, rows + position - 1);
+
+    for (int row = 0; row < rows; row++)
+    {
+        users.insert(position, *(newUsers.at(row)));
+    }
+
+    endInsertRows();
+
+    return true;
+}
+
+bool UserAccountsListModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    qDebug() << "jsme pred begin remove rows";
+
+    beginRemoveRows(parent, row, row + count - 1);
+
+    qDebug() << "jsme v metode, kde budeme mazat";
+    qDebug() << "row = " << row;
+    qDebug() << "row < " << row << " + " << count << " - 1";
+
+    for (int x = row; x < row + count; x++)
+    {
+        qDebug() << "mazeme";
+        users.removeAt(x);
+    }
+
+    endRemoveRows();
+
+    return true;
+}

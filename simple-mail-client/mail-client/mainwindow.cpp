@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     createTestUserAccounts();
     initializeStructures();
-
 }
 
 MainWindow::~MainWindow()

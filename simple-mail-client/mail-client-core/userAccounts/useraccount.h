@@ -38,8 +38,8 @@ private:
     QString password;
     QString smtpServerUrl;
     QString popServerUrl;
-    int smtpServerPort;
-    int popServerPort;
+    int smtpServerPort = 0;
+    int popServerPort = 0;
 
 signals:
 
