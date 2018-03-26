@@ -53,7 +53,7 @@ void EditUserAccountDialog::initializeDialog(UserAccount *account, EditUserAccou
     {
         this->setWindowTitle("Add new account");
     }
-    else
+    else if (mode == Mode::EDIT)
     {
         this->setWindowTitle("Edit account");
     }

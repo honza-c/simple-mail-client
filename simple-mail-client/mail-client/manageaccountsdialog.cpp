@@ -32,7 +32,7 @@ void ManageAccountsDialog::on_btnEdit_clicked()
 {
     QModelIndex index = ui->accountsListView->currentIndex();
 
-    if (!index.isValid())
+    if (!index.isValid() || index.row() < 0)
     {
         return;
     }
@@ -54,7 +54,7 @@ void ManageAccountsDialog::on_btnDelete_clicked()
 {
     QModelIndex index = ui->accountsListView->currentIndex();
 
-    if (!index.isValid() && index.row() < 0)
+    if (!index.isValid() || index.row() < 0)
     {
         return;
     }

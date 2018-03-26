@@ -26,12 +26,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         mailclientcore.cpp \
         userAccounts/useraccount.cpp \
-        userAccounts/useraccountslistmodel.cpp
+        userAccounts/useraccountslistmodel.cpp \
+    userAccounts/useraccount.cpp \
+    userAccounts/useraccountslistmodel.cpp \
+    mailclientcore.cpp \
+    tools/utils.cpp
 
 HEADERS += \
         mailclientcore.h \
         userAccounts/useraccount.h \
-        userAccounts/useraccountslistmodel.h
+        userAccounts/useraccountslistmodel.h \
+    userAccounts/useraccount.h \
+    userAccounts/useraccountslistmodel.h \
+    mailclientcore.h \
+    tools/utils.h \
+    tools/constants.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

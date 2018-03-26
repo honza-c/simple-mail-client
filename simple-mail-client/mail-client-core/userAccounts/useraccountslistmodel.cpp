@@ -46,17 +46,13 @@ void UserAccountsListModel::addNewUserAccount(UserAccount *account)
 void UserAccountsListModel::editSelectedUserAccount(QModelIndex index, UserAccount *account)
 {
     beginResetModel();
-
     users.replace(index.row(), *account);
-
     endResetModel();
 }
 
 void UserAccountsListModel::removeSelectedUserAccount(QModelIndex index)
 {
-    qDebug() << "budeme mazat";
     removeRows(index.row(), 1, QModelIndex());
-    qDebug() << "hotovo";
 }
 
 bool UserAccountsListModel::insertRows(int position, int rows, const QModelIndex &parent, QList<UserAccount*> newUsers)
@@ -75,17 +71,10 @@ bool UserAccountsListModel::insertRows(int position, int rows, const QModelIndex
 
 bool UserAccountsListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
-    qDebug() << "jsme pred begin remove rows";
-
     beginRemoveRows(parent, row, row + count - 1);
-
-    qDebug() << "jsme v metode, kde budeme mazat";
-    qDebug() << "row = " << row;
-    qDebug() << "row < " << row << " + " << count << " - 1";
 
     for (int x = row; x < row + count; x++)
     {
-        qDebug() << "mazeme";
         users.removeAt(x);
     }
 

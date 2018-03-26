@@ -55,6 +55,8 @@ void MainWindow::createTestUserAccounts()
     u3.setPopServerPort(999);
 
     users << u1 << u2 << u3;
+
+    qInfo() << "Test users inserted into application";
 }
 
 void MainWindow::on_actionAccount_Settings_triggered()
