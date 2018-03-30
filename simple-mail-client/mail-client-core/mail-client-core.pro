@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,9 @@ SOURCES += \
     userAccounts/useraccount.cpp \
     userAccounts/useraccountslistmodel.cpp \
     mailclientcore.cpp \
-    tools/utils.cpp
+    tools/utils.cpp \
+    userAccounts/iuseraccountsreaderwriter.cpp \
+    userAccounts/xmluseraccountsreaderwriter.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -40,7 +42,10 @@ HEADERS += \
     userAccounts/useraccountslistmodel.h \
     mailclientcore.h \
     tools/utils.h \
-    tools/constants.h
+    tools/constants.h \
+    userAccounts/usersettingswriterandloader.h \
+    userAccounts/iuseraccountsreaderwriter.h \
+    userAccounts/xmluseraccountsreaderwriter.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

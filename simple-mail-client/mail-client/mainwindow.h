@@ -7,6 +7,9 @@
 #include <QtWidgets>
 #include "manageaccountsdialog.h"
 #include "writemessagewindow.h"
+#include "tools/constants.h"
+#include "userAccounts/xmluseraccountsreaderwriter.h"
+#include "userAccounts/iuseraccountsreaderwriter.h"
 #include <userAccounts/useraccountslistmodel.h>
 
 namespace Ui {
@@ -28,10 +31,10 @@ private slots:
 
 private:
     void initializeStructures();
-    void createTestUserAccounts();
+    void loadUserSettings();
 
     Ui::MainWindow *ui;
-    QList<UserAccount> users;
+    QList<UserAccount> *users;
     UserAccountsListModel *usersModel;
 
     ManageAccountsDialog *manageAccountsDialog;

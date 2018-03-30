@@ -38,7 +38,7 @@ void ManageAccountsDialog::on_btnEdit_clicked()
     }
 
     int rowIndex = index.row();
-    UserAccount account = model->getUserAccountList().at(rowIndex);
+    UserAccount account = model->getUserAccountList()->at(rowIndex);
 
     emit initializeEditDialog(&account, EditUserAccountDialog::Mode::EDIT);
     editDialog->show();

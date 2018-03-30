@@ -5,6 +5,9 @@
 #include <userAccounts/useraccount.h>
 #include <userAccounts/useraccountslistmodel.h>
 #include "edituseraccountdialog.h"
+#include "userAccounts/iuseraccountsreaderwriter.h"
+#include "userAccounts/xmluseraccountsreaderwriter.h"
+#include "tools/constants.h"
 
 namespace Ui {
 class ManageAccountsDialog;
