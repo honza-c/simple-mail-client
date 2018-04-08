@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = mail-client-core
 TEMPLATE = lib
-CONFIG += staticlib
+CONFIG += staticlib c++11
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -23,7 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-LIBS += -lvmime
+LIBS += -lvmime -lcryptopp
 
 SOURCES += \
         mailclientcore.cpp \
@@ -34,7 +34,9 @@ SOURCES += \
     mailclientcore.cpp \
     tools/utils.cpp \
     userAccounts/iuseraccountsreaderwriter.cpp \
-    userAccounts/xmluseraccountsreaderwriter.cpp
+    userAccounts/xmluseraccountsreaderwriter.cpp \
+    tools/ipasswordencryptordecryptor.cpp \
+    tools/aespasswordencryptordecryptor.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -47,7 +49,9 @@ HEADERS += \
     tools/constants.h \
     userAccounts/usersettingswriterandloader.h \
     userAccounts/iuseraccountsreaderwriter.h \
-    userAccounts/xmluseraccountsreaderwriter.h
+    userAccounts/xmluseraccountsreaderwriter.h \
+    tools/ipasswordencryptordecryptor.h \
+    tools/aespasswordencryptordecryptor.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

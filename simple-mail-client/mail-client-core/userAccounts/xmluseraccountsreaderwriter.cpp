@@ -1,11 +1,11 @@
 #include "xmluseraccountsreaderwriter.h"
 
-
 XmlUserAccountsReaderWriter::XmlUserAccountsReaderWriter(QList<UserAccount> *userAccounts)
 {
     this->accountList = userAccounts;
+    this->pwdEncryptorDecryptor = new AESPasswordEncryptorDecryptor(Constants::PASSWORD_AES_CBC_ENCRYPTION_KEY,
+                                                                    Constants::PASSWORD_AES_CBC_ENCRYPTION_IV);
 }
-
 
 bool XmlUserAccountsReaderWriter::loadUserAccounts(QIODevice *device)
 {
@@ -31,7 +31,6 @@ bool XmlUserAccountsReaderWriter::loadUserAccounts(QIODevice *device)
                     return false;
                 }
             }
-
         }
 
         else
@@ -78,7 +77,6 @@ bool XmlUserAccountsReaderWriter::loadAccount()
 {
     UserAccount account;
 
-    qWarning() << reader.errorString();
     while (reader.readNextStartElement())
     {
         QString currentTagName = reader.name().toString();
@@ -97,7 +95,9 @@ bool XmlUserAccountsReaderWriter::loadAccount()
         }
         else if (currentTagName == Constants::USERACCOUNT_PASSWORD_TAGNAME)
         {
-            account.setPassword(reader.readElementText());
+            QString encryptedPassword = reader.readElementText();
+            QString decryptedPassword = this->pwdEncryptorDecryptor->decryptPassword(encryptedPassword);
+            account.setPassword(decryptedPassword);
         }
         else if (currentTagName == Constants::USERACCOUNT_SMTP_SERVER_URL_TAGNAME)
         {
@@ -128,13 +128,14 @@ bool XmlUserAccountsReaderWriter::loadAccount()
 bool XmlUserAccountsReaderWriter::storeAccount(int index)
 {
     UserAccount account = accountList->at(index);
+    QString encryptedPassword = this->pwdEncryptorDecryptor->encryptPassword(account.getPassword());
 
     writer.writeStartElement(Constants::USERSETTINGS_USERACCOUNT_TAGNAME);
 
     writer.writeTextElement(Constants::USERACCOUNT_ACCOUNT_NAME_TAGNAME, account.getAccountName());
     writer.writeTextElement(Constants::USERACCOUNT_YOUR_NAME_TAGNAME, account.getYourName());
     writer.writeTextElement(Constants::USERACCOUNT_EMAIL_ADDRESS_TAGNAME, account.getEmailAddress());
-    writer.writeTextElement(Constants::USERACCOUNT_PASSWORD_TAGNAME, account.getPassword());
+    writer.writeTextElement(Constants::USERACCOUNT_PASSWORD_TAGNAME, encryptedPassword);
     writer.writeTextElement(Constants::USERACCOUNT_SMTP_SERVER_URL_TAGNAME, account.getSmtpServerUrl());
     writer.writeTextElement(Constants::USERACCOUNT_POP3_SERVER_URL_TAGNAME, account.getPopServerUrl());
     writer.writeTextElement(Constants::USERACCOUNT_SMTP_SERVER_PORT_TAGNAME, QString::number(account.getSmtpServerPort()));

@@ -9,6 +9,8 @@
 #include "iuseraccountsreaderwriter.h"
 #include "tools/constants.h"
 #include "useraccount.h"
+#include "tools/aespasswordencryptordecryptor.h"
+#include "tools/ipasswordencryptordecryptor.h"
 
 class XmlUserAccountsReaderWriter : public IUserAccountsReaderWriter
 {
@@ -22,6 +24,7 @@ private:
     QXmlStreamReader reader;
     QXmlStreamWriter writer;
     QList<UserAccount> *accountList;
+    IPasswordEncryptorDecryptor *pwdEncryptorDecryptor;
 
     bool loadAccount();
     bool storeAccount(int index);
