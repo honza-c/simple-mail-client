@@ -22,6 +22,9 @@ namespace Constants
     // password encryption keys
     const QString PASSWORD_AES_CBC_ENCRYPTION_KEY = "1234567890123456789012345678901234567890123456789012345678901234";
     const QString PASSWORD_AES_CBC_ENCRYPTION_IV = "1111111111222222222233333333334444444444555555555566666666667777";
+
+    // path with system root certificates on Linux based systems
+    const QString ROOT_CERTIFICATES_DIRECTORY_PATH_LINUX = "/usr/share/ca-certificates/mozilla";
 }
 
 #endif // CONSTANTS_H
