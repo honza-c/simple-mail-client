@@ -37,8 +37,7 @@ SOURCES += \
     userAccounts/xmluseraccountsreaderwriter.cpp \
     tools/ipasswordencryptordecryptor.cpp \
     tools/aespasswordencryptordecryptor.cpp \
-    messaging/vmimerootcertificateshelper.cpp \
-    messaging/mailmessage.cpp
+    messaging/vmimerootcertificateshelper.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -54,8 +53,7 @@ HEADERS += \
     userAccounts/xmluseraccountsreaderwriter.h \
     tools/ipasswordencryptordecryptor.h \
     tools/aespasswordencryptordecryptor.h \
-    messaging/vmimerootcertificateshelper.h \
-    messaging/mailmessage.h
+    messaging/vmimerootcertificateshelper.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
