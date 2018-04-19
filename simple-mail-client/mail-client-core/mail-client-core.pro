@@ -38,9 +38,7 @@ SOURCES += \
     tools/ipasswordencryptordecryptor.cpp \
     tools/aespasswordencryptordecryptor.cpp \
     messaging/vmimerootcertificateshelper.cpp \
-    messaging/mailmessage.cpp \
-    messaging/abstractmessagesender.cpp \
-    messaging/vmimesmtpmessagesender.cpp
+    messaging/mailmessage.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -57,9 +55,7 @@ HEADERS += \
     tools/ipasswordencryptordecryptor.h \
     tools/aespasswordencryptordecryptor.h \
     messaging/vmimerootcertificateshelper.h \
-    messaging/mailmessage.h \
-    messaging/abstractmessagesender.h \
-    messaging/vmimesmtpmessagesender.h
+    messaging/mailmessage.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
