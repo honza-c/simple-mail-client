@@ -3,12 +3,15 @@
 
 #include <QObject>
 #include <iostream>
+#include "messaging/abstractmessagesender.h"
+#include "messaging/vmimesmtpmessagesender.h"
+#include "messaging/mailmessage.h"
 
 class UserAccount : public QObject
 {
     Q_OBJECT
 public:
-    UserAccount() {}
+    UserAccount();
     UserAccount(const UserAccount &other);
     UserAccount &operator=(const UserAccount &other);
     operator QString() const;
@@ -21,6 +24,7 @@ public:
     void setPopServerUrl(QString popServerUrl);
     void setSmtpServerPort(int smtpServerPort);
     void setPopServerPort(int popServerPort);
+    void setMessageSender(AbstractMessageSender *messageSender);
 
     QString getAccountName();
     QString getYourName();
@@ -30,6 +34,9 @@ public:
     QString getPopServerUrl();
     int getSmtpServerPort();
     int getPopServerPort();
+    AbstractMessageSender* getMessageSender();
+
+    void sendMessage(MailMessage message);
 
 private:
     QString accountName;
@@ -40,6 +47,8 @@ private:
     QString popServerUrl;
     int smtpServerPort = 0;
     int popServerPort = 0;
+
+    AbstractMessageSender *messageSender;
 
 signals:
 

@@ -1,5 +1,10 @@
 #include "useraccount.h"
 
+UserAccount::UserAccount()
+{
+    this->messageSender = new VmimeSmtpMessageSender();
+}
+
 UserAccount::UserAccount(const UserAccount &other)
 {
     this->accountName = other.accountName;
@@ -10,6 +15,8 @@ UserAccount::UserAccount(const UserAccount &other)
     this->popServerUrl = other.popServerUrl;
     this->smtpServerPort = other.smtpServerPort;
     this->popServerPort = other.popServerPort;
+
+    this->messageSender = new VmimeSmtpMessageSender();
 }
 
 UserAccount& UserAccount::operator =(const UserAccount &other)
@@ -22,6 +29,8 @@ UserAccount& UserAccount::operator =(const UserAccount &other)
     this->popServerUrl = other.popServerUrl;
     this->smtpServerPort = other.smtpServerPort;
     this->popServerPort = other.popServerPort;
+
+    this->messageSender = new VmimeSmtpMessageSender();
 }
 
 UserAccount::operator QString() const
@@ -87,6 +96,11 @@ void UserAccount::setPopServerPort(int popServerPort)
     this->popServerPort = popServerPort;
 }
 
+void UserAccount::setMessageSender(AbstractMessageSender *messageSender)
+{
+    this->messageSender = messageSender;
+}
+
 QString UserAccount::getAccountName()
 {
     return this->accountName;
@@ -127,3 +141,12 @@ int UserAccount::getPopServerPort()
     return this->popServerPort;
 }
 
+AbstractMessageSender* UserAccount::getMessageSender()
+{
+    return this->messageSender;
+}
+
+void UserAccount::sendMessage(MailMessage message)
+{
+    this->messageSender->sendMessage(message);
+}

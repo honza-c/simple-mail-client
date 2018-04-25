@@ -33,8 +33,7 @@ void WriteMessageWindow::on_btnSend_clicked()
     int index = this->ui->comboBoxFrom->currentIndex();
     UserAccount userAccount = this->model->getUserAccountList()->at(index);
 
-    qDebug() << "Going to send message via account: " << userAccount.getAccountName();
-    qDebug() << message;
+    userAccount.sendMessage(message);
 
     this->close();
 }
