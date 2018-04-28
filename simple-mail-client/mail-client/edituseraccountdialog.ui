@@ -109,7 +109,11 @@
          <widget class="QLineEdit" name="editPopServerPort"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="editPassword"/>
+         <widget class="QLineEdit" name="editPassword">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

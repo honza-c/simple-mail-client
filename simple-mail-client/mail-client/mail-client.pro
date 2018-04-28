@@ -47,3 +47,4 @@ FORMS += \
 INCLUDEPATH += $$PWD/../mail-client-core
 LIBS += -L$$OUT_PWD/../mail-client-core/ -lmail-client-core
 LIBS += -lcryptopp
+LIBS += -lvmime
