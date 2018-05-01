@@ -11,6 +11,9 @@
 #include "userAccounts/xmluseraccountsreaderwriter.h"
 #include "userAccounts/iuseraccountsreaderwriter.h"
 #include <userAccounts/useraccountslistmodel.h>
+#include "messaging/messagemetadata.h"
+#include "messaging/vmimeimapstore.h"
+#include "messaging/messagemetadatatablemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,6 +40,9 @@ private:
     Ui::MainWindow *ui;
     QList<UserAccount> *users;
     UserAccountsListModel *usersModel;
+    QList<QList<MessageMetadata>> *messagesMetadata;
+    QList<VmimeImapStore> *imapStores;
+    MessageMetadataTableModel *messageMetadataModel;
 
     QSplitter *mainHorizontalSplitter;
     QListView *userAccountsListView;
