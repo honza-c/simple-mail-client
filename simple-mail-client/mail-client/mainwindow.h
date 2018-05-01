@@ -32,10 +32,15 @@ private slots:
 private:
     void initializeStructures();
     void loadUserSettings();
+    void initializeUi();
 
     Ui::MainWindow *ui;
     QList<UserAccount> *users;
     UserAccountsListModel *usersModel;
+
+    QSplitter *mainHorizontalSplitter;
+    QListView *userAccountsListView;
+    QTableView *messagesMetadataTableView;
 
     ManageAccountsDialog *manageAccountsDialog;
     WriteMessageWindow *writeMessageWindow;

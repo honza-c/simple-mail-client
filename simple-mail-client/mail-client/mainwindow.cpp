@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     loadUserSettings();
     initializeStructures();
+    initializeUi();
+
+    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
 }
 
 MainWindow::~MainWindow()
@@ -20,6 +23,10 @@ void MainWindow::initializeStructures()
     usersModel = new UserAccountsListModel(users);
     manageAccountsDialog = new ManageAccountsDialog(usersModel);
     writeMessageWindow = new WriteMessageWindow(usersModel);
+
+    this->mainHorizontalSplitter = new QSplitter();
+    this->userAccountsListView = new QListView();
+    this->messagesMetadataTableView = new QTableView();
 }
 
 void MainWindow::loadUserSettings()
@@ -57,4 +64,13 @@ void MainWindow::on_actionAccount_Settings_triggered()
 void MainWindow::on_actionNew_Message_triggered()
 {
     writeMessageWindow->show();
+}
+
+void MainWindow::initializeUi()
+{
+    this->userAccountsListView->setModel(this->usersModel);
+    this->mainHorizontalSplitter->addWidget(this->userAccountsListView);
+    this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
+
+    ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);
 }
