@@ -6,15 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->messagesMetadata = new QList<QList<MessageMetadata>>();
-    this->imapStores = new QList<VmimeImapStore>();
-    loadUserSettings();
-    initializeStructures();
-    initializeUi();
-    this->messageMetadataModel = new MessageMetadataTableModel(this->messagesMetadata->at(0));
-    this->messagesMetadataTableView->setModel(this->messageMetadataModel);
 
-    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
+    initializeDataStructures();
+    initializeUserAccounts();
+    initializeDataModels();
+    initializeApplicationWindows();
+    initializeAndInstallWidgets();
 }
 
 MainWindow::~MainWindow()
@@ -22,25 +19,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initializeStructures()
+void MainWindow::initializeDataStructures()
 {
-    usersModel = new UserAccountsListModel(users);
-    manageAccountsDialog = new ManageAccountsDialog(usersModel);
-    writeMessageWindow = new WriteMessageWindow(usersModel);
-
-    this->mainHorizontalSplitter = new QSplitter();
-    this->userAccountsListView = new QListView();
-    this->messagesMetadataTableView = new QTableView();
+    this->userAccountsList = new QList<UserAccount>();
+    this->inboxesMessageMetadataList = new QList<QList<MessageMetadata>>();
+    this->inboxesList = new QList<VmimeImapStore>();
 }
 
-void MainWindow::loadUserSettings()
+void MainWindow::initializeUserAccounts()
 {
     QFile file(Constants::USER_ACCOUNT_SETTINGS_FILE);
 
     if (!file.open(QFile::ReadOnly | QFile::Text))
     {
         qWarning() << "Error while opening user accounts settings file: " << file.errorString();
-        this->users = new QList<UserAccount>();
         file.close();
         return;
     }
@@ -52,28 +44,61 @@ void MainWindow::loadUserSettings()
     if (!xmlReaderWriter->loadUserAccounts(&file))
     {
         file.close();
-        this->users = new QList<UserAccount>();
         return;
     }
 
-    this->users = users;
+    this->userAccountsList = users;
     file.close();
 
-    for (UserAccount user : *users)
+    initializeInboxMetadata();
+}
+
+void MainWindow::initializeInboxMetadata()
+{
+    for (UserAccount user : *userAccountsList)
     {
         VmimeImapStore imapStore(user.getPopServerUrl(),
                                  user.getEmailAddress(),
                                  user.getPassword(),
                                  user.getPopServerPort());
 
-        imapStores->push_back(imapStore);
+        inboxesList->push_back(imapStore);
     }
 
-    for (VmimeImapStore imapStore : *imapStores)
+    for (VmimeImapStore imapStore : *inboxesList)
     {
         QList<MessageMetadata> messagesMetadata = imapStore.getMessagesMetadata();
-        this->messagesMetadata->push_back(messagesMetadata);
+        this->inboxesMessageMetadataList->push_back(messagesMetadata);
     }
+}
+
+void MainWindow::initializeDataModels()
+{
+    userAccountsListModel = new UserAccountsListModel(userAccountsList);
+    this->messageMetadataTableModel = new MessageMetadataTableModel(this->inboxesMessageMetadataList->at(0));
+}
+
+void MainWindow::initializeApplicationWindows()
+{
+    manageAccountsDialog = new ManageAccountsDialog(userAccountsListModel);
+    writeMessageWindow = new WriteMessageWindow(userAccountsListModel);
+}
+
+void MainWindow::initializeAndInstallWidgets()
+{
+    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
+
+    this->mainHorizontalSplitter = new QSplitter();
+    this->userAccountsListView = new QListView();
+    this->messagesMetadataTableView = new QTableView();
+
+    this->userAccountsListView->setModel(this->userAccountsListModel);
+    this->messagesMetadataTableView->setModel(this->messageMetadataTableModel);
+
+    this->mainHorizontalSplitter->addWidget(this->userAccountsListView);
+    this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
+
+    ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);
 }
 
 void MainWindow::on_actionAccount_Settings_triggered()
@@ -84,13 +109,4 @@ void MainWindow::on_actionAccount_Settings_triggered()
 void MainWindow::on_actionNew_Message_triggered()
 {
     writeMessageWindow->show();
-}
-
-void MainWindow::initializeUi()
-{
-    this->userAccountsListView->setModel(this->usersModel);
-    this->mainHorizontalSplitter->addWidget(this->userAccountsListView);
-    this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
-
-    ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);
 }

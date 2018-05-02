@@ -29,20 +29,24 @@ public:
 
 private slots:
     void on_actionAccount_Settings_triggered();
-
     void on_actionNew_Message_triggered();
 
 private:
-    void initializeStructures();
-    void loadUserSettings();
-    void initializeUi();
+    void initializeDataStructures();
+    void initializeUserAccounts();
+    void initializeInboxMetadata();
+    void initializeDataModels();
+    void initializeApplicationWindows();
+    void initializeAndInstallWidgets();
 
     Ui::MainWindow *ui;
-    QList<UserAccount> *users;
-    UserAccountsListModel *usersModel;
-    QList<QList<MessageMetadata>> *messagesMetadata;
-    QList<VmimeImapStore> *imapStores;
-    MessageMetadataTableModel *messageMetadataModel;
+
+    QList<UserAccount> *userAccountsList;
+    QList<VmimeImapStore> *inboxesList;
+    QList<QList<MessageMetadata>> *inboxesMessageMetadataList;
+
+    UserAccountsListModel *userAccountsListModel;
+    MessageMetadataTableModel *messageMetadataTableModel;
 
     QSplitter *mainHorizontalSplitter;
     QListView *userAccountsListView;
