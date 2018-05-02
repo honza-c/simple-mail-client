@@ -20,7 +20,7 @@ MessageMetadata VmimeMessageMetadataParser::parse(vmime::shared_ptr<vmime::net::
     msgMetadata.setIsReplied(flags & vmime::net::message::FLAG_REPLIED);
     msgMetadata.setIsDraft(flags & vmime::net::message::FLAG_DRAFT);
 
-    msgMetadata.setDate(vmimeDecodedStringToQString(header->generate()));
+    msgMetadata.setDate(vmimeDecodedStringToQString(header->Date()->generate()));
     msgMetadata.setFrom(vmimeDecodedStringToQString(header->From()->generate()));
     msgMetadata.setSize(message->getSize());
     msgMetadata.setSubject(vmimeDecodedStringToQString(header->Subject()->generate()));
