@@ -134,8 +134,8 @@ int UserAccount::getPopServerPort()
 
 void UserAccount::sendMessage(MailMessage message)
 {
-    AbstractMessageSender *messageSender;
-    messageSender = new VmimeSmtpMessageSender(getSmtpServerUrl(), getEmailAddress(), getPassword());
+    AbstractMessageSenderService *smtpMessageSender;
+    smtpMessageSender = new VmimeSmtpService(getSmtpServerUrl(), getEmailAddress(), getPassword());
 
-    messageSender->sendMessage(message);
+    smtpMessageSender->sendMessage(message);
 }

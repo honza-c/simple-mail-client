@@ -39,12 +39,13 @@ SOURCES += \
     tools/aespasswordencryptordecryptor.cpp \
     messaging/vmimerootcertificateshelper.cpp \
     messaging/mailmessage.cpp \
-    messaging/abstractmessagesender.cpp \
-    messaging/vmimesmtpmessagesender.cpp \
+    messaging/abstractmessagesenderservice.cpp \
     messaging/vmimeimapstore.cpp \
     messaging/messagemetadata.cpp \
     messaging/vmimemessagemetadataparser.cpp \
-    messaging/messagemetadatatablemodel.cpp
+    messaging/messagemetadatatablemodel.cpp \
+    messaging/vmimemessagingbaseservice.cpp \
+    messaging/vmimesmtpservice.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -62,12 +63,13 @@ HEADERS += \
     tools/aespasswordencryptordecryptor.h \
     messaging/vmimerootcertificateshelper.h \
     messaging/mailmessage.h \
-    messaging/abstractmessagesender.h \
-    messaging/vmimesmtpmessagesender.h \
+    messaging/abstractmessagesenderservice.h \
     messaging/vmimeimapstore.h \
     messaging/messagemetadata.h \
     messaging/vmimemessagemetadataparser.h \
-    messaging/messagemetadatatablemodel.h
+    messaging/messagemetadatatablemodel.h \
+    messaging/vmimemessagingbaseservice.h \
+    messaging/vmimesmtpservice.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

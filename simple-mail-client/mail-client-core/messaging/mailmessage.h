@@ -7,7 +7,8 @@ class MailMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit MailMessage(QObject *parent = nullptr) {}
+    explicit MailMessage(QObject *parent = nullptr):
+        QObject (parent){}
     MailMessage(const MailMessage &other);
     MailMessage &operator=(const MailMessage &other);
     operator QString() const;

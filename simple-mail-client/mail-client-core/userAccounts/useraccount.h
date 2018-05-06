@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <iostream>
-#include "messaging/abstractmessagesender.h"
-#include "messaging/vmimesmtpmessagesender.h"
 #include "messaging/mailmessage.h"
+#include "messaging/abstractmessagesenderservice.h"
+#include "messaging/vmimesmtpservice.h"
 
 class UserAccount : public QObject
 {
