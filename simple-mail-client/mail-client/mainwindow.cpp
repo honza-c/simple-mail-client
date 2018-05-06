@@ -23,7 +23,7 @@ void MainWindow::initializeDataStructures()
 {
     this->userAccountsList = new QList<UserAccount>();
     this->inboxesMessageMetadataList = new QList<QList<MessageMetadata>>();
-    this->inboxesList = new QList<VmimeImapStore>();
+    this->inboxesList = new QList<VmimeInboxService*>();
 }
 
 void MainWindow::initializeUserAccounts()
@@ -57,17 +57,18 @@ void MainWindow::initializeInboxMetadata()
 {
     for (UserAccount user : *userAccountsList)
     {
-        VmimeImapStore imapStore(user.getPopServerUrl(),
+        VmimeImapService *imapService = new VmimeImapService
+                                (user.getPopServerUrl(),
                                  user.getEmailAddress(),
                                  user.getPassword(),
                                  user.getPopServerPort());
 
-        inboxesList->push_back(imapStore);
+        inboxesList->push_back(imapService);
     }
 
-    for (VmimeImapStore imapStore : *inboxesList)
+    for (VmimeInboxService *inboxService : *inboxesList)
     {
-        QList<MessageMetadata> messagesMetadata = imapStore.getMessagesMetadata();
+        QList<MessageMetadata> messagesMetadata = inboxService->getMessageMetadata();
         this->inboxesMessageMetadataList->push_back(messagesMetadata);
     }
 }

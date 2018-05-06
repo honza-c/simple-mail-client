@@ -1,6 +1,7 @@
 #ifndef ABSTRACTMESSAGESENDERSERVICE_H
 #define ABSTRACTMESSAGESENDERSERVICE_H
 
+#include <QObject>
 #include "mailmessage.h"
 
 class AbstractMessageSenderService : public QObject

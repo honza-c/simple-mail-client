@@ -40,12 +40,14 @@ SOURCES += \
     messaging/vmimerootcertificateshelper.cpp \
     messaging/mailmessage.cpp \
     messaging/abstractmessagesenderservice.cpp \
-    messaging/vmimeimapstore.cpp \
     messaging/messagemetadata.cpp \
     messaging/vmimemessagemetadataparser.cpp \
     messaging/messagemetadatatablemodel.cpp \
     messaging/vmimemessagingbaseservice.cpp \
-    messaging/vmimesmtpservice.cpp
+    messaging/vmimesmtpservice.cpp \
+    messaging/abstractinboxservice.cpp \
+    messaging/vmimeinboxservice.cpp \
+    messaging/vmimeimapservice.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -64,12 +66,14 @@ HEADERS += \
     messaging/vmimerootcertificateshelper.h \
     messaging/mailmessage.h \
     messaging/abstractmessagesenderservice.h \
-    messaging/vmimeimapstore.h \
     messaging/messagemetadata.h \
     messaging/vmimemessagemetadataparser.h \
     messaging/messagemetadatatablemodel.h \
     messaging/vmimemessagingbaseservice.h \
-    messaging/vmimesmtpservice.h
+    messaging/vmimesmtpservice.h \
+    messaging/abstractinboxservice.h \
+    messaging/vmimeinboxservice.h \
+    messaging/vmimeimapservice.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

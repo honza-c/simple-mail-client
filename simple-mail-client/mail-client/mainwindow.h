@@ -12,7 +12,8 @@
 #include "userAccounts/iuseraccountsreaderwriter.h"
 #include <userAccounts/useraccountslistmodel.h>
 #include "messaging/messagemetadata.h"
-#include "messaging/vmimeimapstore.h"
+#include "messaging/vmimeimapservice.h"
+#include "messaging/vmimeinboxservice.h"
 #include "messaging/messagemetadatatablemodel.h"
 
 namespace Ui {
@@ -42,7 +43,7 @@ private:
     Ui::MainWindow *ui;
 
     QList<UserAccount> *userAccountsList;
-    QList<VmimeImapStore> *inboxesList;
+    QList<VmimeInboxService*> *inboxesList;
     QList<QList<MessageMetadata>> *inboxesMessageMetadataList;
 
     UserAccountsListModel *userAccountsListModel;
