@@ -12,16 +12,16 @@ Current temporary limitation is that library works only on GNU/Linux operating s
 ## Install dependencies on Fedora Linux
 - install Qt framework
 - install Crypto++ library:
-```bash
+```
 sudo dnf install cryptopp cryptopp-devel
 ```
 - install C/C++ development tools:
-```bash
+```
 sudo dnf install @development-tools
 sudo dnf group install "C Development Tools and Libraries"
 ```
 - Download and install newest stable version of vmime library:
-```bash
+```
 wget https://github.com/kisli/vmime/archive/v0.9.2.tar.gz
 tar -xf v0.9.2.tar.gz
 mkdir vmime-0.9.2/build
