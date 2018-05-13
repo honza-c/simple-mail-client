@@ -48,6 +48,6 @@ void VmimeMessagingBaseService::initializeSession()
 void VmimeMessagingBaseService::initializeCertificateVerifier()
 {
     this->certVerifier = vmime::make_shared<vmime::security::cert::defaultCertificateVerifier>();
-    VMimeRootCertificatesHelper certHelper(Constants::ROOT_CERTIFICATES_DIRECTORY_PATH_LINUX);
+    VMimeRootCertificatesHelper certHelper;
     this->certVerifier->setX509RootCAs(certHelper.getSystemRootCertificates());
 }

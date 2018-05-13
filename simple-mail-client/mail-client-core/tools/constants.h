@@ -24,7 +24,8 @@ namespace Constants
     const QString PASSWORD_AES_CBC_ENCRYPTION_IV = "1111111111222222222233333333334444444444555555555566666666667777";
 
     // path with system root certificates on Linux based systems
-    const QString ROOT_CERTIFICATES_DIRECTORY_PATH_LINUX = "/usr/share/ca-certificates/mozilla";
+    const QString ROOT_CERTIFICATES_LINUX_MOZILLA_CA_CERTS = "/usr/share/ca-certificates/mozilla";
+    const QString ROOT_CERTIFICATES_LINUX_PEM_BUNDLE_PATH = "/etc/pki/ca-trust/extracted/pem";
 }
 
 #endif // CONSTANTS_H

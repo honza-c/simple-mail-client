@@ -12,17 +12,21 @@
 #include <iostream>
 #include <fstream>
 
+#include "tools/constants.h"
+
 class VMimeRootCertificatesHelper : public QObject
 {
     Q_OBJECT
 public:
-    explicit VMimeRootCertificatesHelper(QString certLocationPath, QObject *parent = nullptr);
+    explicit VMimeRootCertificatesHelper(QObject *parent = nullptr);
     std::vector <vmime::shared_ptr<vmime::security::cert::X509Certificate>> getSystemRootCertificates();
 
 private:
-    QDir *certificatesDir;
+    QString certificatesPath;
 
-    vmime::shared_ptr<vmime::security::cert::X509Certificate> getCertificate(const char *absolutePath);
+    vmime::shared_ptr<vmime::security::cert::X509Certificate> getCertificateFromFile(const char *absolutePath);
+    std::vector <vmime::shared_ptr<vmime::security::cert::X509Certificate>> getCertificatesFromPemBundlePath();
+    std::vector <vmime::shared_ptr<vmime::security::cert::X509Certificate>> getCertificatesFromFolder();
 
 signals:
 
