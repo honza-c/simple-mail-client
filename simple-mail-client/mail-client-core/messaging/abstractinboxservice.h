@@ -2,6 +2,7 @@
 #define ABSTRACTINBOXSERVICE_H
 
 #include "messagemetadata.h"
+#include "inboxfolder.h"
 
 class AbstractInboxService : public QObject
 {
@@ -9,6 +10,7 @@ class AbstractInboxService : public QObject
 public:
     virtual ~AbstractInboxService() {}
     virtual QList<MessageMetadata> getMessageMetadata() = 0;
+    virtual QList<InboxFolder> getInboxFolders() = 0;
 
 signals:
 

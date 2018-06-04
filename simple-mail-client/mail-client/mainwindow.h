@@ -15,6 +15,8 @@
 #include "messaging/vmimeimapservice.h"
 #include "messaging/vmimeinboxservice.h"
 #include "messaging/messagemetadatatablemodel.h"
+#include "messaging/inboxfoldertreemodel.h"
+#include "messaging/inboxfolder.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,7 @@ private:
     void initializeDataStructures();
     void initializeUserAccounts();
     void initializeInboxMetadata();
+    void initializeInboxFolders();
     void initializeDataModels();
     void initializeApplicationWindows();
     void initializeAndInstallWidgets();
@@ -44,14 +47,17 @@ private:
 
     QList<UserAccount> *userAccountsList;
     QList<VmimeInboxService*> *inboxesList;
+    QList<QList<InboxFolder>> *inboxesFolderList;
     QList<QList<MessageMetadata>> *inboxesMessageMetadataList;
 
     UserAccountsListModel *userAccountsListModel;
+    InboxFolderTreeModel *inboxFolderTreeModel;
     MessageMetadataTableModel *messageMetadataTableModel;
 
     QSplitter *mainHorizontalSplitter;
     QListView *userAccountsListView;
     QTableView *messagesMetadataTableView;
+    QTreeView *inboxFolderTreeView;
 
     ManageAccountsDialog *manageAccountsDialog;
     WriteMessageWindow *writeMessageWindow;

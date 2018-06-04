@@ -24,6 +24,7 @@ void MainWindow::initializeDataStructures()
     this->userAccountsList = new QList<UserAccount>();
     this->inboxesMessageMetadataList = new QList<QList<MessageMetadata>>();
     this->inboxesList = new QList<VmimeInboxService*>();
+    this->inboxesFolderList = new QList<QList<InboxFolder>>();
 }
 
 void MainWindow::initializeUserAccounts()
@@ -51,6 +52,7 @@ void MainWindow::initializeUserAccounts()
     file.close();
 
     initializeInboxMetadata();
+    initializeInboxFolders();
 }
 
 void MainWindow::initializeInboxMetadata()
@@ -73,9 +75,19 @@ void MainWindow::initializeInboxMetadata()
     }
 }
 
+void MainWindow::initializeInboxFolders()
+{
+    for (VmimeInboxService *inboxService : *inboxesList)
+    {
+        QList<InboxFolder> inboxFolders = inboxService->getInboxFolders();
+        this->inboxesFolderList->push_back(inboxFolders);
+    }
+}
+
 void MainWindow::initializeDataModels()
 {
-    userAccountsListModel = new UserAccountsListModel(userAccountsList);
+    this->userAccountsListModel = new UserAccountsListModel(userAccountsList);
+    this->inboxFolderTreeModel = new InboxFolderTreeModel(*(this->inboxesFolderList));
     this->messageMetadataTableModel = new MessageMetadataTableModel(this->inboxesMessageMetadataList->at(0));
 }
 
@@ -90,13 +102,13 @@ void MainWindow::initializeAndInstallWidgets()
     this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
 
     this->mainHorizontalSplitter = new QSplitter();
-    this->userAccountsListView = new QListView();
+    this->inboxFolderTreeView = new QTreeView();
     this->messagesMetadataTableView = new QTableView();
 
-    this->userAccountsListView->setModel(this->userAccountsListModel);
+    this->inboxFolderTreeView->setModel(this->inboxFolderTreeModel);
     this->messagesMetadataTableView->setModel(this->messageMetadataTableModel);
 
-    this->mainHorizontalSplitter->addWidget(this->userAccountsListView);
+    this->mainHorizontalSplitter->addWidget(inboxFolderTreeView);
     this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
 
     ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);

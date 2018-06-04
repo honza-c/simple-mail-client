@@ -8,6 +8,8 @@
 #include "vmimemessagemetadataparser.h"
 #include "abstractinboxservice.h"
 #include "messagemetadata.h"
+#include "inboxfolder.h"
+#include "vmimeinboxfolderparser.h"
 
 class VmimeInboxService: public VmimeMessagingBaseService, public AbstractInboxService
 {
@@ -16,6 +18,7 @@ public:
         : VmimeMessagingBaseService(serverUrl, emailAddress, password) {}
 
     QList<MessageMetadata> getMessageMetadata() override;
+    QList<InboxFolder> getInboxFolders() override;
 
 protected:
     virtual vmime::utility::url getStoreUrl() = 0;

@@ -33,3 +33,26 @@ QList<MessageMetadata> VmimeInboxService::getMessageMetadata()
 
     return metadataList;
 }
+
+QList<InboxFolder> VmimeInboxService::getInboxFolders()
+{
+    QList<InboxFolder> folders;
+
+    vmime::shared_ptr<vmime::net::store> store = initializeStore();
+    store->connect();
+    vmime::shared_ptr<vmime::net::folder> rootFolder = store->getRootFolder();
+    std::vector<vmime::shared_ptr<vmime::net::folder>> subFolders = rootFolder->getFolders(true);
+
+    VmimeInboxFolderParser parser;
+
+    folders << parser.parse(rootFolder, QString(this->emailAddress.c_str()));
+
+    for (unsigned int i = 0; i < subFolders.size(); i++)
+    {
+        folders << parser.parse(subFolders[i], QString(this->emailAddress.c_str()));
+    }
+
+    store->disconnect();
+
+    return folders;
+}

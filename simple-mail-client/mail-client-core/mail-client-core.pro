@@ -47,7 +47,11 @@ SOURCES += \
     messaging/vmimesmtpservice.cpp \
     messaging/abstractinboxservice.cpp \
     messaging/vmimeinboxservice.cpp \
-    messaging/vmimeimapservice.cpp
+    messaging/vmimeimapservice.cpp \
+    messaging/inboxfoldertreeitem.cpp \
+    messaging/inboxfoldertreemodel.cpp \
+    messaging/inboxfolder.cpp \
+    messaging/vmimeinboxfolderparser.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -73,7 +77,11 @@ HEADERS += \
     messaging/vmimesmtpservice.h \
     messaging/abstractinboxservice.h \
     messaging/vmimeinboxservice.h \
-    messaging/vmimeimapservice.h
+    messaging/vmimeimapservice.h \
+    messaging/inboxfoldertreeitem.h \
+    messaging/inboxfoldertreemodel.h \
+    messaging/inboxfolder.h \
+    messaging/vmimeinboxfolderparser.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
