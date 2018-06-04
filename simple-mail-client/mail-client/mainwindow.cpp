@@ -105,8 +105,20 @@ void MainWindow::initializeAndInstallWidgets()
     this->inboxFolderTreeView = new QTreeView();
     this->messagesMetadataTableView = new QTableView();
 
+    this->inboxFolderTreeView->setHeaderHidden(true);
+
     this->inboxFolderTreeView->setModel(this->inboxFolderTreeModel);
     this->messagesMetadataTableView->setModel(this->messageMetadataTableModel);
+
+    QModelIndexList inboxFolderIndexes = inboxFolderTreeModel->match(inboxFolderTreeModel->index(0, 0), Qt::DisplayRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);
+
+    for (QModelIndex index : inboxFolderIndexes)
+    {
+        inboxFolderTreeView->expand(index);
+    }
+
+    this->messagesMetadataTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    this->messagesMetadataTableView->setShowGrid(false);
 
     this->mainHorizontalSplitter->addWidget(inboxFolderTreeView);
     this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
