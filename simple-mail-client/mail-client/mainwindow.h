@@ -5,6 +5,7 @@
 #include <userAccounts/useraccount.h>
 #include <QDebug>
 #include <QtWidgets>
+#include <QWebEngineView>
 #include "manageaccountsdialog.h"
 #include "writemessagewindow.h"
 #include "tools/constants.h"
@@ -42,6 +43,8 @@ private:
     void initializeDataModels();
     void initializeApplicationWindows();
     void initializeAndInstallWidgets();
+    void initializeWidgetsAndLayouts();
+    void installLayouts();
 
     Ui::MainWindow *ui;
 
@@ -55,9 +58,30 @@ private:
     MessageMetadataTableModel *messageMetadataTableModel;
 
     QSplitter *mainHorizontalSplitter;
-    QListView *userAccountsListView;
     QTableView *messagesMetadataTableView;
     QTreeView *inboxFolderTreeView;
+
+    QHBoxLayout *attachmentsLayout;
+    QPushButton *btnAttachment1;
+    QPushButton *btnAttachment2;
+    QPushButton *btnAttachment3;
+    QLabel *lblAttachments;
+
+    QHBoxLayout *msgActionsLayout;
+    QPushButton *btnReply;
+    QPushButton *btnReplyToAll;
+    QPushButton *btnForward;
+
+    QHBoxLayout *msgButtonsLayout;
+    QWebEngineView *msgContentView;
+    QSplitter *messageDataSplitter;
+
+    QVBoxLayout *msgButtonsAndContentLayout;
+
+    QWidget *attachmentsWidget;
+    QWidget *msgActionsWidget;
+    QWidget *msgAttachmentsAndActionsWidget;
+    QWidget *msgButtonsAndContentWidget;
 
     ManageAccountsDialog *manageAccountsDialog;
     WriteMessageWindow *writeMessageWindow;

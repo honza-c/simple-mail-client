@@ -12,10 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeDataModels();
     initializeApplicationWindows();
     initializeAndInstallWidgets();
-
-    this->setWindowIcon(QIcon::fromTheme("mail-send"));
-    QCoreApplication::setApplicationName("Simple Mail Client");
-
 }
 
 MainWindow::~MainWindow()
@@ -101,16 +97,80 @@ void MainWindow::initializeApplicationWindows()
     writeMessageWindow = new WriteMessageWindow(userAccountsListModel);
 }
 
-void MainWindow::initializeAndInstallWidgets()
+void MainWindow::initializeWidgetsAndLayouts()
 {
-    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
-
     this->mainHorizontalSplitter = new QSplitter();
     this->inboxFolderTreeView = new QTreeView();
     this->messagesMetadataTableView = new QTableView();
 
-    this->inboxFolderTreeView->setHeaderHidden(true);
+    this->attachmentsLayout = new QHBoxLayout();
+    this->btnAttachment1 = new QPushButton("foo.txt");
+    this->btnAttachment2 = new QPushButton("bar.doc");
+    this->btnAttachment3 = new QPushButton("baz.jpg");
+    this->lblAttachments = new QLabel("Attachments:");
 
+    this->msgActionsLayout = new QHBoxLayout();
+    this->btnReply = new QPushButton("Reply");
+    this->btnReplyToAll = new QPushButton("Reply to all");
+    this->btnForward = new QPushButton("Forward");
+
+    this->msgButtonsLayout = new QHBoxLayout();
+    this->msgContentView = new QWebEngineView();
+    this->msgContentView->load(QUrl("https://www.google.com"));
+    this->messageDataSplitter = new QSplitter();
+
+    this->msgButtonsAndContentLayout = new QVBoxLayout();
+
+    this->attachmentsWidget = new QWidget();
+    this->msgActionsWidget = new QWidget();
+    this->msgAttachmentsAndActionsWidget = new QWidget();
+    this->msgButtonsAndContentWidget = new QWidget();
+}
+
+void MainWindow::installLayouts()
+{
+    this->attachmentsLayout->addWidget(this->lblAttachments);
+    this->attachmentsLayout->addWidget(this->btnAttachment1);
+    this->attachmentsLayout->addWidget(this->btnAttachment2);
+    this->attachmentsLayout->addWidget(this->btnAttachment3);
+
+    this->attachmentsWidget->setLayout(this->attachmentsLayout);
+
+    this->msgActionsLayout->addWidget(this->btnReply);
+    this->msgActionsLayout->addWidget(this->btnReplyToAll);
+    this->msgActionsLayout->addWidget(this->btnForward);
+
+    this->msgActionsWidget->setLayout(this->msgActionsLayout);
+
+    this->msgButtonsLayout->addWidget(this->attachmentsWidget);
+    this->msgButtonsLayout->addWidget(this->msgActionsWidget);
+
+    this->msgAttachmentsAndActionsWidget->setLayout(this->msgButtonsLayout);
+
+    this->msgButtonsAndContentLayout->addWidget(this->msgAttachmentsAndActionsWidget);
+    this->msgButtonsAndContentLayout->addWidget(this->msgContentView);
+
+    this->msgButtonsAndContentWidget->setLayout(this->msgButtonsAndContentLayout);
+
+    this->messageDataSplitter->addWidget(this->messagesMetadataTableView);
+    this->messageDataSplitter->addWidget(this->msgButtonsAndContentWidget);
+
+    this->mainHorizontalSplitter->addWidget(inboxFolderTreeView);
+    this->mainHorizontalSplitter->addWidget(this->messageDataSplitter);
+
+    ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);
+}
+
+void MainWindow::initializeAndInstallWidgets()
+{
+    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
+    this->setWindowIcon(QIcon::fromTheme("mail-send"));
+    QCoreApplication::setApplicationName("Simple Mail Client");
+
+    initializeWidgetsAndLayouts();
+    installLayouts();
+
+    this->inboxFolderTreeView->setHeaderHidden(true);
     this->inboxFolderTreeView->setModel(this->inboxFolderTreeModel);
     this->messagesMetadataTableView->setModel(this->messageMetadataTableModel);
 
@@ -124,10 +184,18 @@ void MainWindow::initializeAndInstallWidgets()
     this->messagesMetadataTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->messagesMetadataTableView->setShowGrid(false);
 
-    this->mainHorizontalSplitter->addWidget(inboxFolderTreeView);
-    this->mainHorizontalSplitter->addWidget(this->messagesMetadataTableView);
+    this->messageDataSplitter->setOrientation(Qt::Vertical);
+    this->attachmentsLayout->setAlignment(Qt::AlignLeft);
+    this->msgActionsLayout->setAlignment(Qt::AlignRight);
+    this->msgButtonsLayout->setContentsMargins(0, 0, 0, 0);
 
-    ui->horizontalLayout->addWidget(this->mainHorizontalSplitter);
+    this->btnAttachment1->setIcon(QIcon::fromTheme("mail-attachment"));
+    this->btnAttachment2->setIcon(QIcon::fromTheme("mail-attachment"));
+    this->btnAttachment3->setIcon(QIcon::fromTheme("mail-attachment"));
+
+    this->btnReply->setIcon(QIcon::fromTheme("mail-reply-sender"));
+    this->btnReplyToAll->setIcon(QIcon::fromTheme("mail-reply-all"));
+    this->btnForward->setIcon(QIcon::fromTheme("mail-forward"));
 }
 
 void MainWindow::on_actionAccount_Settings_triggered()
