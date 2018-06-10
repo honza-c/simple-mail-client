@@ -2,6 +2,7 @@
 #define MESSAGEMETADATA_H
 
 #include <QObject>
+#include <QDateTime>
 
 class MessageMetadata : public QObject
 {
@@ -14,11 +15,10 @@ public:
 
     void setId(unsigned long id);
     void setSize(unsigned long size);
-    void setDate(QString date);
-    void setFrom(QString from);
-    void setSender(QString sender);
+    void setDate(QDateTime date);
+    void setFromName(QString fromName);
+    void setFromAddress(QString fromAddress);
     void setSubject(QString subject);
-    void setTo(QString to);
     void setIsDeleted(bool isDeleted);
     void setIsDraft(bool isDraft);
     void setIsRecent(bool isRecent);
@@ -27,11 +27,10 @@ public:
 
     unsigned long getId();
     unsigned long getSize();
-    QString getDate();
-    QString getFrom();
-    QString getSender();
+    QDateTime getDate();
+    QString getFromName();
+    QString getFromAddress();
     QString getSubject();
-    QString getTo();
     bool getIsDeleted();
     bool getIsDraft();
     bool getIsRecent();
@@ -45,11 +44,10 @@ public slots:
 private:
     unsigned long id;
     unsigned long size;
-    QString date;
-    QString from;
-    QString sender;
+    QDateTime date;
+    QString fromName;
+    QString fromAddress;
     QString subject;
-    QString to;
     bool isDeleted;
     bool isDraft;
     bool isRecent;

@@ -12,6 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeDataModels();
     initializeApplicationWindows();
     initializeAndInstallWidgets();
+
+    this->setWindowIcon(QIcon::fromTheme("mail-send"));
+    QCoreApplication::setApplicationName("Simple Mail Client");
+
 }
 
 MainWindow::~MainWindow()

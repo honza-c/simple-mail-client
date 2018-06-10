@@ -12,7 +12,7 @@ int MessageMetadataTableModel::rowCount(const QModelIndex &parent) const
 
 int MessageMetadataTableModel::columnCount(const QModelIndex &parent) const
 {
-    return 6;
+    return 5;
 }
 
 QVariant MessageMetadataTableModel::data(const QModelIndex &index, int role) const
@@ -35,11 +35,11 @@ QVariant MessageMetadataTableModel::data(const QModelIndex &index, int role) con
             case 1:
                 return metadata.getSubject();
             case 2:
-                return metadata.getSender();
+                return metadata.getFromName();
             case 3:
-                return metadata.getFrom();
+                return metadata.getFromAddress();
             case 4:
-                return metadata.getTo();
+                return metadata.getDate().toString("dd.MM.yyyy HH:mm");
             case 5:
                 return metadata.getDate();
             default:
@@ -70,12 +70,10 @@ QVariant MessageMetadataTableModel::headerData(int section, Qt::Orientation orie
             case 1:
                 return "Subject";
             case 2:
-                return "Sender";
+                return "From name";
             case 3:
-                return "From";
+                return "From address";
             case 4:
-                return "To";
-            case 5:
                 return "Date";
             }
         }

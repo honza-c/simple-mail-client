@@ -10,10 +10,9 @@ MessageMetadata::MessageMetadata(const MessageMetadata &other)
     this->id = other.id;
     this->size = other.size;
     this->date = other.date;
-    this->from = other.from;
-    this->sender = other.sender;
+    this->fromAddress = other.fromAddress;
+    this->fromName = other.fromName;
     this->subject = other.subject;
-    this->to = other.to;
     this->isDeleted = other.isDeleted;
     this->isDraft = other.isDraft;
     this->isRecent = other.isRecent;
@@ -26,10 +25,9 @@ MessageMetadata& MessageMetadata::operator=(const MessageMetadata &other)
     this->id = other.id;
     this->size = other.size;
     this->date = other.date;
-    this->from = other.from;
-    this->sender = other.sender;
+    this->fromAddress = other.fromAddress;
+    this->fromName = other.fromName;
     this->subject = other.subject;
-    this->to = other.to;
     this->isDeleted = other.isDeleted;
     this->isDraft = other.isDraft;
     this->isRecent = other.isRecent;
@@ -48,19 +46,16 @@ MessageMetadata::operator QString() const
     result += QString::number(this->size);
 
     result += " Date: ";
-    result += this->date;
+    result += this->date.toString("dd.MM.yyyy HH:mm");
 
-    result += " From: ";
-    result += this->from;
+    result += " From name: ";
+    result += this->fromName;
 
-    result += " Sender: ";
-    result += this->sender;
+    result += " From address: ";
+    result += this->fromAddress;
 
     result += " Subject: ";
     result += this->subject;
-
-    result += " To: ";
-    result += this->to;
 
     result += " Is Deleted: ";
     result += this->isDeleted;
@@ -91,29 +86,24 @@ void MessageMetadata::setSize(unsigned long size)
     this->size = size;
 }
 
-void MessageMetadata::setDate(QString date)
+void MessageMetadata::setDate(QDateTime date)
 {
     this->date = date;
 }
 
-void MessageMetadata::setFrom(QString from)
+void MessageMetadata::setFromAddress(QString fromAddress)
 {
-    this->from = from;
+    this->fromAddress = fromAddress;
 }
 
-void MessageMetadata::setSender(QString sender)
+void MessageMetadata::setFromName(QString fromName)
 {
-    this->sender = sender;
+    this->fromName = fromName;
 }
 
 void MessageMetadata::setSubject(QString subject)
 {
     this->subject = subject;
-}
-
-void MessageMetadata::setTo(QString to)
-{
-    this->to = to;
 }
 
 void MessageMetadata::setIsDeleted(bool isDeleted)
@@ -151,29 +141,24 @@ unsigned long MessageMetadata::getSize()
     return this->size;
 }
 
-QString MessageMetadata::getDate()
+QDateTime MessageMetadata::getDate()
 {
     return this->date;
 }
 
-QString MessageMetadata::getFrom()
+QString MessageMetadata::getFromAddress()
 {
-    return this->from;
+    return this->fromAddress;
 }
 
-QString MessageMetadata::getSender()
+QString MessageMetadata::getFromName()
 {
-    return this->sender;
+    return this->fromName;
 }
 
 QString MessageMetadata::getSubject()
 {
     return this->subject;
-}
-
-QString MessageMetadata::getTo()
-{
-    return this->to;
 }
 
 bool MessageMetadata::getIsDeleted()
