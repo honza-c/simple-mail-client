@@ -163,7 +163,7 @@ void MainWindow::installLayouts()
 
 void MainWindow::initializeAndInstallWidgets()
 {
-    this->setWindowTitle("Simple Mail Clinet (based on mail-client-core 0.1)");
+    this->setWindowTitle("Simple Mail Client");
     this->setWindowIcon(QIcon::fromTheme("mail-send"));
     QCoreApplication::setApplicationName("Simple Mail Client");
 
