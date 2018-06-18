@@ -10,6 +10,7 @@
 #include "messagemetadata.h"
 #include "inboxfolder.h"
 #include "vmimeinboxfolderparser.h"
+#include "vmimemessagecontentparser.h"
 
 class VmimeInboxService: public VmimeMessagingBaseService, public AbstractInboxService
 {
@@ -19,10 +20,12 @@ public:
 
     QList<MessageMetadata> getMessageMetadata() override;
     QList<InboxFolder> getInboxFolders() override;
+    QString getHtmlMessageContent(QString folderPath, int folderPosition) override;
+    QString getTextMessageContent(QString folderPath, int folderPosition) override;
 
 protected:
     virtual vmime::utility::url getStoreUrl() = 0;
-    virtual vmime::shared_ptr<vmime::net::store> initializeStore() = 0;
+    virtual vmime::shared_ptr<vmime::net::store> initializeStore() = 0;   
 };
 
 #endif // VMIMEINBOXSERVICE_H

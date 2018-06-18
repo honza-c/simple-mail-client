@@ -56,3 +56,43 @@ QList<InboxFolder> VmimeInboxService::getInboxFolders()
 
     return folders;
 }
+
+QString VmimeInboxService::getHtmlMessageContent(QString folderPath, int folderPosition)
+{
+    vmime::shared_ptr<vmime::net::store> store = initializeStore();
+    store->connect();
+    vmime::shared_ptr<vmime::net::folder> rootFolder = store->getDefaultFolder();
+    rootFolder->open(vmime::net::folder::MODE_READ_ONLY);
+
+    size_t messagesCount = rootFolder->getMessageCount();
+    vmime::shared_ptr<vmime::net::message> message = rootFolder->getMessage(messagesCount);
+
+    rootFolder->fetchMessage(message, vmime::net::fetchAttributes::STRUCTURE);
+
+    VmimeMessageContentParser contentParser;
+    vmime::shared_ptr<vmime::message> parsedMessage = message->getParsedMessage();
+
+    store->disconnect();
+
+    return contentParser.parseHtmlContent(parsedMessage);
+}
+
+QString VmimeInboxService::getTextMessageContent(QString folderPath, int folderPosition)
+{
+    vmime::shared_ptr<vmime::net::store> store = initializeStore();
+    store->connect();
+    vmime::shared_ptr<vmime::net::folder> rootFolder = store->getDefaultFolder();
+    rootFolder->open(vmime::net::folder::MODE_READ_ONLY);
+
+    size_t messagesCount = rootFolder->getMessageCount();
+    vmime::shared_ptr<vmime::net::message> message = rootFolder->getMessage(messagesCount);
+
+    rootFolder->fetchMessage(message, vmime::net::fetchAttributes::STRUCTURE);
+
+    VmimeMessageContentParser contentParser;
+
+    vmime::shared_ptr<vmime::message> parsedMessage = message->getParsedMessage();
+
+    store->disconnect();
+    return contentParser.parsePlainTextContent(parsedMessage);
+}

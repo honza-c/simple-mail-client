@@ -116,7 +116,10 @@ void MainWindow::initializeWidgetsAndLayouts()
 
     this->msgButtonsLayout = new QHBoxLayout();
     this->msgContentView = new QWebEngineView();
-    this->msgContentView->load(QUrl("https://www.google.com"));
+
+    QString htmlString = this->inboxesList->at(0)->getHtmlMessageContent("foo", 666);
+    // this->msgContentView->load(QUrl("https://www.google.com"));
+    this->msgContentView->setHtml(htmlString);
     this->messageDataSplitter = new QSplitter();
 
     this->msgButtonsAndContentLayout = new QVBoxLayout();

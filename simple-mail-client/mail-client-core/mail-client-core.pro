@@ -51,7 +51,8 @@ SOURCES += \
     messaging/inboxfoldertreeitem.cpp \
     messaging/inboxfoldertreemodel.cpp \
     messaging/inboxfolder.cpp \
-    messaging/vmimeinboxfolderparser.cpp
+    messaging/vmimeinboxfolderparser.cpp \
+    messaging/vmimemessagecontentparser.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -81,7 +82,8 @@ HEADERS += \
     messaging/inboxfoldertreeitem.h \
     messaging/inboxfoldertreemodel.h \
     messaging/inboxfolder.h \
-    messaging/vmimeinboxfolderparser.h
+    messaging/vmimeinboxfolderparser.h \
+    messaging/vmimemessagecontentparser.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

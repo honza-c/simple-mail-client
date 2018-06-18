@@ -11,6 +11,8 @@ public:
     virtual ~AbstractInboxService() {}
     virtual QList<MessageMetadata> getMessageMetadata() = 0;
     virtual QList<InboxFolder> getInboxFolders() = 0;
+    virtual QString getHtmlMessageContent(QString folderPath, int folderPosition) = 0;
+    virtual QString getTextMessageContent(QString folderPath, int folderPosition) = 0;
 
 signals:
 
