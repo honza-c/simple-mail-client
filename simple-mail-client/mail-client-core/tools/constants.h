@@ -6,6 +6,7 @@ namespace Constants
     // filename constants for files used in application
     const QString ERROR_LOG_FILE_NAME = "error.log";
     const QString USER_ACCOUNT_SETTINGS_FILE = "users.xml";
+    const QString DATABASE_FILE_NAME = "database.sqlite";
 
     // element names used in XML configuration file for store user accounts
     const QString USERSETTINGS_ROOT_TAGNAME = "Users";

@@ -18,6 +18,7 @@
 #include "messaging/messagemetadatatablemodel.h"
 #include "messaging/inboxfoldertreemodel.h"
 #include "messaging/inboxfolder.h"
+#include "database/databasemanager.h"
 
 namespace Ui {
 class MainWindow;

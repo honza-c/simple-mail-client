@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml
+QT       += core gui xml sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -52,7 +52,32 @@ SOURCES += \
     messaging/inboxfoldertreemodel.cpp \
     messaging/inboxfolder.cpp \
     messaging/vmimeinboxfolderparser.cpp \
-    messaging/vmimemessagecontentparser.cpp
+    messaging/vmimemessagecontentparser.cpp \
+    messaging/abstractinboxservice.cpp \
+    messaging/abstractmessagesenderservice.cpp \
+    messaging/inboxfolder.cpp \
+    messaging/inboxfoldertreeitem.cpp \
+    messaging/inboxfoldertreemodel.cpp \
+    messaging/mailmessage.cpp \
+    messaging/messagemetadata.cpp \
+    messaging/messagemetadatatablemodel.cpp \
+    messaging/vmimeimapservice.cpp \
+    messaging/vmimeinboxfolderparser.cpp \
+    messaging/vmimeinboxservice.cpp \
+    messaging/vmimemessagecontentparser.cpp \
+    messaging/vmimemessagemetadataparser.cpp \
+    messaging/vmimemessagingbaseservice.cpp \
+    messaging/vmimerootcertificateshelper.cpp \
+    messaging/vmimesmtpservice.cpp \
+    tools/aespasswordencryptordecryptor.cpp \
+    tools/ipasswordencryptordecryptor.cpp \
+    tools/utils.cpp \
+    userAccounts/iuseraccountsreaderwriter.cpp \
+    userAccounts/useraccount.cpp \
+    userAccounts/useraccountslistmodel.cpp \
+    userAccounts/xmluseraccountsreaderwriter.cpp \
+    mailclientcore.cpp \
+    database/databasemanager.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -83,7 +108,33 @@ HEADERS += \
     messaging/inboxfoldertreemodel.h \
     messaging/inboxfolder.h \
     messaging/vmimeinboxfolderparser.h \
-    messaging/vmimemessagecontentparser.h
+    messaging/vmimemessagecontentparser.h \
+    messaging/abstractinboxservice.h \
+    messaging/abstractmessagesenderservice.h \
+    messaging/inboxfolder.h \
+    messaging/inboxfoldertreeitem.h \
+    messaging/inboxfoldertreemodel.h \
+    messaging/mailmessage.h \
+    messaging/messagemetadata.h \
+    messaging/messagemetadatatablemodel.h \
+    messaging/vmimeimapservice.h \
+    messaging/vmimeinboxfolderparser.h \
+    messaging/vmimeinboxservice.h \
+    messaging/vmimemessagecontentparser.h \
+    messaging/vmimemessagemetadataparser.h \
+    messaging/vmimemessagingbaseservice.h \
+    messaging/vmimerootcertificateshelper.h \
+    messaging/vmimesmtpservice.h \
+    tools/aespasswordencryptordecryptor.h \
+    tools/constants.h \
+    tools/ipasswordencryptordecryptor.h \
+    tools/utils.h \
+    userAccounts/iuseraccountsreaderwriter.h \
+    userAccounts/useraccount.h \
+    userAccounts/useraccountslistmodel.h \
+    userAccounts/xmluseraccountsreaderwriter.h \
+    mailclientcore.h \
+    database/databasemanager.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

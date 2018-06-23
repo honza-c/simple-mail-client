@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeDataModels();
     initializeApplicationWindows();
     initializeAndInstallWidgets();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -21,6 +23,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::initializeDataStructures()
 {
+    if (QFile::exists(Constants::DATABASE_FILE_NAME))
+    {
+        QFile::remove(Constants::DATABASE_FILE_NAME);
+    }
+
+    DatabaseManager dbManager;
+
     this->userAccountsList = new QList<UserAccount>();
     this->inboxesMessageMetadataList = new QList<QList<MessageMetadata>>();
     this->inboxesList = new QList<VmimeInboxService*>();
@@ -118,7 +127,6 @@ void MainWindow::initializeWidgetsAndLayouts()
     this->msgContentView = new QWebEngineView();
 
     QString htmlString = this->inboxesList->at(0)->getHtmlMessageContent("foo", 666);
-    // this->msgContentView->load(QUrl("https://www.google.com"));
     this->msgContentView->setHtml(htmlString);
     this->messageDataSplitter = new QSplitter();
 
