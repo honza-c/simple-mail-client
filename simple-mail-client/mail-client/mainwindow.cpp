@@ -82,6 +82,16 @@ void MainWindow::initializeInboxMetadata()
         QList<MessageMetadata> messagesMetadata = inboxService->getMessageMetadata();
         this->inboxesMessageMetadataList->push_back(messagesMetadata);
     }
+
+    for (int i = 0; i < this->inboxesMessageMetadataList->size(); i++)
+    {
+        QList<MessageMetadata> metadataList = this->inboxesMessageMetadataList->at(i);
+
+        for (MessageMetadata data : metadataList)
+        {
+            this->dbManager->addMessageDataToDatabase(data);
+        }
+    }
 }
 
 void MainWindow::initializeInboxFolders()

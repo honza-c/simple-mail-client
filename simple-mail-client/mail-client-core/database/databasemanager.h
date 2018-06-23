@@ -11,6 +11,7 @@
 #include <QSqlError>
 #include "tools/constants.h"
 #include "messaging/inboxfolder.h"
+#include "messaging/messagemetadata.h"
 
 class DatabaseManager : public QObject
 {
@@ -18,6 +19,7 @@ class DatabaseManager : public QObject
 public:
     explicit DatabaseManager(QObject *parent = nullptr);
     void addFolderToDatabase(InboxFolder folder);
+    void addMessageDataToDatabase(MessageMetadata msgData);
 
 signals:
 

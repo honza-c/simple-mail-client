@@ -138,6 +138,35 @@ void DatabaseManager::initializeDatabaseStructure()
                "hasAttachments integer)");
 }
 
+void DatabaseManager::addMessageDataToDatabase(MessageMetadata data)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO MessageData "
+                  "(folderId, positionInFolder, flag_seen, flag_deleted, flag_recent, flag_replied, flag_draft, date, sender, size, subject, recipient, inCopy, plainTextContent, htmlContent, hasAttachments)"
+                  " VALUES "
+                  "(:folderId, :positionInFolder, :flag_seen, :flag_deleted, :flag_recent, :flag_replied, :flag_draft, :date, :sender, :size, :subject, :recipient, :inCopy, :plainTextContent, :htmlContent, :hasAttachments)");
+
+    query.bindValue(":folderId", 666);
+    query.bindValue(":positionInFolder", static_cast<int>(data.getId()));
+    query.bindValue(":flag_seen", data.getIsSeen());
+    query.bindValue(":flag_deleted", data.getIsDeleted());
+    query.bindValue(":flag_recent", data.getIsRecent());
+    query.bindValue(":flag_replied", data.getIsReplied());
+    query.bindValue(":flag_draft", data.getIsDraft());
+    query.bindValue(":date", data.getDate().toMSecsSinceEpoch());
+    query.bindValue(":sender", data.getFromAddress());
+    query.bindValue(":size", static_cast<int>(data.getSize()));
+    query.bindValue(":subject", data.getSubject());
+    query.bindValue(":recipient", "Foo");
+    query.bindValue(":inCopy", "Foo");
+    query.bindValue(":plainTextContent", "foo");
+    query.bindValue(":htmlContent", "foo");
+    query.bindValue(":hasAttachments", 0);
+
+    query.exec();
+}
+
 void DatabaseManager::addFolderToDatabase(InboxFolder folder)
 {
     QSqlQuery query;
