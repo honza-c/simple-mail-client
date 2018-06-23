@@ -10,12 +10,14 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include "tools/constants.h"
+#include "messaging/inboxfolder.h"
 
 class DatabaseManager : public QObject
 {
     Q_OBJECT
 public:
     explicit DatabaseManager(QObject *parent = nullptr);
+    void addFolderToDatabase(InboxFolder folder);
 
 signals:
 

@@ -54,6 +54,8 @@ private:
     QList<QList<InboxFolder>> *inboxesFolderList;
     QList<QList<MessageMetadata>> *inboxesMessageMetadataList;
 
+    DatabaseManager *dbManager;
+
     UserAccountsListModel *userAccountsListModel;
     InboxFolderTreeModel *inboxFolderTreeModel;
     MessageMetadataTableModel *messageMetadataTableModel;

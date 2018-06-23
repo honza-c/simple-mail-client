@@ -28,7 +28,7 @@ void MainWindow::initializeDataStructures()
         QFile::remove(Constants::DATABASE_FILE_NAME);
     }
 
-    DatabaseManager dbManager;
+    this->dbManager = new DatabaseManager();
 
     this->userAccountsList = new QList<UserAccount>();
     this->inboxesMessageMetadataList = new QList<QList<MessageMetadata>>();
@@ -90,6 +90,14 @@ void MainWindow::initializeInboxFolders()
     {
         QList<InboxFolder> inboxFolders = inboxService->getInboxFolders();
         this->inboxesFolderList->push_back(inboxFolders);
+    }
+
+    for (int i = 0; i < this->inboxesFolderList->size(); i++)
+    {
+        for (InboxFolder folder : this->inboxesFolderList->at(i))
+        {
+            this->dbManager->addFolderToDatabase(folder);
+        }
     }
 }
 

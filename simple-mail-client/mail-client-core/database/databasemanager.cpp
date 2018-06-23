@@ -137,3 +137,27 @@ void DatabaseManager::initializeDatabaseStructure()
                "htmlContent text, "
                "hasAttachments integer)");
 }
+
+void DatabaseManager::addFolderToDatabase(InboxFolder folder)
+{
+    QSqlQuery query;
+
+
+    query.prepare("INSERT INTO Folders "
+                  "(email, path, flag_all, flag_archive, flag_drafts, flag_important, flag_junk, flag_sent, flag_trash)"
+                  " VALUES "
+                  "(:email, :path, :flag_all, :flag_archive, :flag_drafts, :flag_important, :flag_junk, :flag_sent, :flag_trash)");
+
+    query.bindValue(":email", folder.getEmailAddress());
+    query.bindValue(":path", folder.getPath());
+    query.bindValue(":flag_all", folder.isAllMessages());
+    query.bindValue(":flag_archive", folder.isArchive());
+    query.bindValue(":flag_drafts", folder.isDrafts());
+    query.bindValue(":flag_important", folder.isImportant());
+    query.bindValue(":flag_junk", folder.isJunk());
+    query.bindValue(":flag_sent", folder.isSent());
+    query.bindValue(":flag_trash", folder.isTrash());
+
+
+    query.exec();
+}
