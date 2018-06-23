@@ -25,7 +25,8 @@ public:
 
 protected:
     virtual vmime::utility::url getStoreUrl() = 0;
-    virtual vmime::shared_ptr<vmime::net::store> initializeStore() = 0;   
+    virtual vmime::shared_ptr<vmime::net::store> initializeStore() = 0;
+    QString getFolderPath(vmime::shared_ptr<vmime::net::folder> folder);
 };
 
 #endif // VMIMEINBOXSERVICE_H

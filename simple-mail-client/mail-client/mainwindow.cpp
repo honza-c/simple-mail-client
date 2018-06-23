@@ -60,23 +60,12 @@ void MainWindow::initializeUserAccounts()
     this->userAccountsList = users;
     file.close();
 
-    initializeInboxMetadata();
     initializeInboxFolders();
+    initializeInboxMetadata();
 }
 
 void MainWindow::initializeInboxMetadata()
 {
-    for (UserAccount user : *userAccountsList)
-    {
-        VmimeImapService *imapService = new VmimeImapService
-                                (user.getPopServerUrl(),
-                                 user.getEmailAddress(),
-                                 user.getPassword(),
-                                 user.getPopServerPort());
-
-        inboxesList->push_back(imapService);
-    }
-
     for (VmimeInboxService *inboxService : *inboxesList)
     {
         QList<MessageMetadata> messagesMetadata = inboxService->getMessageMetadata();
@@ -96,6 +85,17 @@ void MainWindow::initializeInboxMetadata()
 
 void MainWindow::initializeInboxFolders()
 {
+    for (UserAccount user : *userAccountsList)
+    {
+        VmimeImapService *imapService = new VmimeImapService
+                                (user.getPopServerUrl(),
+                                 user.getEmailAddress(),
+                                 user.getPassword(),
+                                 user.getPopServerPort());
+
+        inboxesList->push_back(imapService);
+    }
+
     for (VmimeInboxService *inboxService : *inboxesList)
     {
         QList<InboxFolder> inboxFolders = inboxService->getInboxFolders();

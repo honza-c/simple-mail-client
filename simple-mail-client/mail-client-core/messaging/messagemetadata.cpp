@@ -9,6 +9,12 @@ MessageMetadata::MessageMetadata(const MessageMetadata &other)
 {
     this->id = other.id;
     this->size = other.size;
+    this->folderPath = other.folderPath;
+    this->emailAddress = other.emailAddress;
+    this->plainTextContent = other.plainTextContent;
+    this->htmlContent = other.htmlContent;
+    this->recipients = other.recipients;
+    this->inCopy = other.inCopy;
     this->date = other.date;
     this->fromAddress = other.fromAddress;
     this->fromName = other.fromName;
@@ -24,6 +30,12 @@ MessageMetadata& MessageMetadata::operator=(const MessageMetadata &other)
 {
     this->id = other.id;
     this->size = other.size;
+    this->folderPath = other.folderPath;
+    this->emailAddress = other.emailAddress;
+    this->plainTextContent = other.plainTextContent;
+    this->htmlContent = other.htmlContent;
+    this->recipients = other.recipients;
+    this->inCopy = other.inCopy;
     this->date = other.date;
     this->fromAddress = other.fromAddress;
     this->fromName = other.fromName;
@@ -44,6 +56,18 @@ MessageMetadata::operator QString() const
 
     result += " Size: ";
     result += QString::number(this->size);
+
+    result += "Folder path: ";
+    result += this->folderPath;
+
+    result += "Email address: ";
+    result += this->emailAddress;
+
+    result += "Recipients: ";
+    result += this->recipients;
+
+    result += "In copy: ";
+    result += this->inCopy;
 
     result += " Date: ";
     result += this->date.toString("dd.MM.yyyy HH:mm");
@@ -72,6 +96,12 @@ MessageMetadata::operator QString() const
     result += " Is Seen: ";
     result += this->isSeen;
 
+    result += "Plain text content: ";
+    result += this->plainTextContent;
+
+    result += "HTML content: ";
+    result += this->htmlContent;
+
     return result;
 }
 
@@ -86,9 +116,29 @@ void MessageMetadata::setSize(unsigned long size)
     this->size = size;
 }
 
+void MessageMetadata::setFolderPath(QString folderPath)
+{
+    this->folderPath = folderPath;
+}
+
+void MessageMetadata::setEmailAddress(QString emailAddress)
+{
+    this->emailAddress = emailAddress;
+}
+
+void MessageMetadata::setRecipients(QString recipients)
+{
+    this->recipients = recipients;
+}
+
 void MessageMetadata::setDate(QDateTime date)
 {
     this->date = date;
+}
+
+void MessageMetadata::setInCopy(QString inCopy)
+{
+    this->inCopy = inCopy;
 }
 
 void MessageMetadata::setFromAddress(QString fromAddress)
@@ -131,6 +181,16 @@ void MessageMetadata::setIsSeen(bool isSeen)
     this->isSeen = isSeen;
 }
 
+void MessageMetadata::setPlainTextContent(QString plainTextContent)
+{
+    this->plainTextContent = plainTextContent;
+}
+
+void MessageMetadata::setHtmlContent(QString htmlContent)
+{
+    this->htmlContent = htmlContent;
+}
+
 unsigned long MessageMetadata::getId()
 {
     return this->id;
@@ -139,6 +199,26 @@ unsigned long MessageMetadata::getId()
 unsigned long MessageMetadata::getSize()
 {
     return this->size;
+}
+
+QString MessageMetadata::getFolderPath()
+{
+    return this->folderPath;
+}
+
+QString MessageMetadata::getEmailAddress()
+{
+    return this->emailAddress;
+}
+
+QString MessageMetadata::getRecipients()
+{
+    return this->recipients;
+}
+
+QString MessageMetadata::getInCopy()
+{
+    return this->inCopy;
 }
 
 QDateTime MessageMetadata::getDate()
@@ -186,3 +266,12 @@ bool MessageMetadata::getIsSeen()
     return this->isSeen;
 }
 
+QString MessageMetadata::getPlainTextContent()
+{
+    return this->plainTextContent;
+}
+
+QString MessageMetadata::getHtmlContent()
+{
+    return this->htmlContent;
+}

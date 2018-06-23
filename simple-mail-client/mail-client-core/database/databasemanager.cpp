@@ -155,13 +155,13 @@ void DatabaseManager::addMessageDataToDatabase(MessageMetadata data)
     query.bindValue(":flag_replied", data.getIsReplied());
     query.bindValue(":flag_draft", data.getIsDraft());
     query.bindValue(":date", data.getDate().toMSecsSinceEpoch());
-    query.bindValue(":sender", data.getFromAddress());
+    query.bindValue(":sender", data.getFromName() + " " + data.getFromAddress());
     query.bindValue(":size", static_cast<int>(data.getSize()));
     query.bindValue(":subject", data.getSubject());
-    query.bindValue(":recipient", "Foo");
-    query.bindValue(":inCopy", "Foo");
-    query.bindValue(":plainTextContent", "foo");
-    query.bindValue(":htmlContent", "foo");
+    query.bindValue(":recipient", data.getRecipients());
+    query.bindValue(":inCopy", data.getInCopy());
+    query.bindValue(":plainTextContent", data.getPlainTextContent());
+    query.bindValue(":htmlContent", data.getHtmlContent());
     query.bindValue(":hasAttachments", 0);
 
     query.exec();

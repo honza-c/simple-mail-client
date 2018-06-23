@@ -20,10 +20,13 @@ QList<MessageMetadata> VmimeInboxService::getMessageMetadata()
                               vmime::net::fetchAttributes::SIZE |
                               vmime::net::fetchAttributes::UID);
 
+    QString folderPath = getFolderPath(rootFolder);
+
     store->disconnect();
 
     QList<MessageMetadata> metadataList;
-    VmimeMessageMetadataParser metadataParser;
+
+    VmimeMessageMetadataParser metadataParser(this->emailAddress.c_str(), folderPath);
 
     for (unsigned int i = 0; i < messages.size(); i++)
     {
@@ -32,6 +35,21 @@ QList<MessageMetadata> VmimeInboxService::getMessageMetadata()
     }
 
     return metadataList;
+}
+
+QString VmimeInboxService::getFolderPath(vmime::shared_ptr<vmime::net::folder> folder)
+{
+    vmime::string path = folder->getName().getBuffer();
+
+    if (path.empty())
+    {
+        return QString("/");
+    }
+    else
+    {
+        vmime::shared_ptr<vmime::net::folder> parent = folder->getParent();
+        return QString(getFolderPath(parent) + path.c_str() + "/");
+    }
 }
 
 QList<InboxFolder> VmimeInboxService::getInboxFolders()

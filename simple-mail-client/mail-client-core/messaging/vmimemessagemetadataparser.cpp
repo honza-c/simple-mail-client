@@ -1,8 +1,30 @@
 #include "vmimemessagemetadataparser.h"
 
-VmimeMessageMetadataParser::VmimeMessageMetadataParser(QObject *parent) : QObject(parent)
+VmimeMessageMetadataParser::VmimeMessageMetadataParser(QString emailAddress, QString path, QObject *parent)
+    : QObject(parent)
 {
+    this->emailAddress = emailAddress;
+    this->path = path;
+}
 
+void VmimeMessageMetadataParser::setEmailAddress(QString emailAddress)
+{
+    this->emailAddress = emailAddress;
+}
+
+void VmimeMessageMetadataParser::setPath(QString path)
+{
+    this->path = path;
+}
+
+QString VmimeMessageMetadataParser::getEmailAddress()
+{
+    return this->emailAddress;
+}
+
+QString VmimeMessageMetadataParser::getPath()
+{
+    return this->path;
 }
 
 MessageMetadata VmimeMessageMetadataParser::parse(vmime::shared_ptr<vmime::net::message> message)
@@ -25,6 +47,13 @@ MessageMetadata VmimeMessageMetadataParser::parse(vmime::shared_ptr<vmime::net::
     msgMetadata.setFromName(parseFromName(header));
     msgMetadata.setSize(message->getSize());
     msgMetadata.setSubject(parseSubject(header));
+
+    msgMetadata.setFolderPath(this->path);
+    msgMetadata.setEmailAddress(this->emailAddress);
+    msgMetadata.setPlainTextContent("");
+    msgMetadata.setHtmlContent("");
+    msgMetadata.setRecipients(parseRecipients(header));
+    msgMetadata.setInCopy(parseInCopy(header));
 
     return msgMetadata;
 }
@@ -135,4 +164,27 @@ QString VmimeMessageMetadataParser::vmimeDecodedStringToQString(vmime::string in
     vmime::text output;
     vmime::text::decodeAndUnfold(input, &output);
     return QString(output.getConvertedText(vmime::charsets::UTF_8).c_str());
+}
+
+QString VmimeMessageMetadataParser::parseRecipients(vmime::shared_ptr<const vmime::header> header)
+{
+    QString extractedRecipients = vmimeDecodedStringToQString(header->To()->generate());
+
+    // Extracted data is in format: "To: desired data..."
+    // Removing "To: " from the extracted string
+
+    return extractedRecipients.right(extractedRecipients.size() - 4);
+}
+
+QString VmimeMessageMetadataParser::parseInCopy(vmime::shared_ptr<const vmime::header> header)
+{
+    if (header->hasField("Cc"))
+    {
+        QString extractedInCopy = vmimeDecodedStringToQString(header->Cc()->generate());
+        return extractedInCopy;
+    }
+    else
+    {
+        return "";
+    }
 }
