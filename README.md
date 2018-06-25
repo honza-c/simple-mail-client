@@ -3,6 +3,9 @@ This repository contains `mail-client-core`, a simple Qt/C++ library providing t
 
 Current temporary limitation is that library works only on GNU/Linux operating systems: Support for Debian-based distributions (Ubuntu, Debian, Mint, ...) and Red Hat-based distributions (RHEL, CentOS, Fedora, ...) is done. Support for MS Windows and Mac OS X is planned.
 
+![screenshot](https://files.culik.net/simple-mail-client.png "screenshot")
+
+
 ## Dependencies
 `mail-client-core` uses this list of external components and libraries:
 - Qt framework
@@ -44,6 +47,7 @@ In `simple-mail-client/mail-client-core/tools/constants.h` file are placed some 
     // filename constants for files used in application
     const QString ERROR_LOG_FILE_NAME = "error.log";
     const QString USER_ACCOUNT_SETTINGS_FILE = "users.xml";
+    const QString DATABASE_FILE_NAME = "database.sqlite";
 
     // password encryption keys
     const QString PASSWORD_AES_CBC_ENCRYPTION_KEY = "1234567890123456789012345678901234567890123456789012345678901234";
@@ -51,6 +55,7 @@ In `simple-mail-client/mail-client-core/tools/constants.h` file are placed some 
 ```
 - `ERROR_LOG_FILE_NAME` is the name of the file, where error log is located. Default file name is `error.log` and its default location is in the same folder where the binary of client application is.
 - `USER_ACCOUNT_SETTINGS_FILE` is the name of the XML file, where the configuration of user accounts is stored. Default file name is `users.xml` and its default location is in the same folder where the binary of client application is.
+- `DATABASE_FILE_NAME` is the name of the .sqlite file, where is the database data stored.
 - `PASSWORD_AES_CBC_ENCRYPTION_KEY` and `PASSWORD_AES_CBC_ENCRYPTION_IV` are the vaules that are used for encrypting and decrypting the user passwords, that are stored in the `USER_ACCOUNT_SETTINGS_FILE`. It is strongly recommended to change default values before the build.
 
 In `simple-mail-client/mail-client-core/tools/utils.cpp` is function to handle logging. Default behavior is that every log level information is printed into `std::err` stream and information with `Critical` and `Fatal` log levels are stored in `ERROR_LOG_FILE_NAME` file. You may want to change the behavior of the logger:
@@ -112,7 +117,7 @@ or open `simple-mail-client/simple-mail-client.pro` in QtCreator and hit the run
 - Location of static library `mail-client-core` is `build/mail-client-core/libmailclient-core.a`.
 - Location of `simple-mail-client` application is `build/mail-client/mail-client`
 
-## Integration of mail-client-core to your Qt project
+## Integration of mail-client-core to other Qt project
 Add those lines to your .pro file:
 ```
 INCLUDEPATH += $$PWD/path-to-mail-client-core-subproject
