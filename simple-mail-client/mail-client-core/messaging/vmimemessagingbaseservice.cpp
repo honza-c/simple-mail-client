@@ -48,6 +48,26 @@ void VmimeMessagingBaseService::initializeSession()
 void VmimeMessagingBaseService::initializeCertificateVerifier()
 {
     this->certVerifier = vmime::make_shared<vmime::security::cert::defaultCertificateVerifier>();
-    VMimeRootCertificatesHelper certHelper;
-    this->certVerifier->setX509RootCAs(certHelper.getSystemRootCertificates());
+    this->certVerifier->setX509RootCAs(getSystemCertificates());
+}
+
+std::vector<vmime::shared_ptr<vmime::security::cert::X509Certificate>> VmimeMessagingBaseService::getSystemCertificates()
+{
+    std::vector<vmime::shared_ptr<vmime::security::cert::X509Certificate>> vmimeCerts;
+
+    QSslConfiguration sslConfiguration;
+    QList<QSslCertificate> certs = sslConfiguration.systemCaCertificates();
+
+    for (QSslCertificate cert : certs)
+    {
+        vmime::utility::inputStreamStringAdapter isAdapter(cert.toDer().toStdString());
+        vmime::shared_ptr<vmime::security::cert::X509Certificate> vmimeCert = vmime::security::cert::X509Certificate::import(isAdapter);
+
+        if (vmimeCert != nullptr)
+        {
+            vmimeCerts.push_back(vmimeCert);
+        }
+    }
+
+    return vmimeCerts;
 }

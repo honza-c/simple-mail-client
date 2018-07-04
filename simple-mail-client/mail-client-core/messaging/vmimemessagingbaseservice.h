@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <vmime/vmime.hpp>
-#include "vmimerootcertificateshelper.h"
 #include "tools/constants.h"
+#include <QSslCertificate>
+#include <QSslConfiguration>
 
 class VmimeMessagingBaseService : public QObject
 {
@@ -37,6 +38,7 @@ protected:
 
     void initializeSession();
     void initializeCertificateVerifier();
+    std::vector<vmime::shared_ptr<vmime::security::cert::X509Certificate>> getSystemCertificates();
 };
 
 #endif // VMIMEMESSAGINGBASESERVICE_H

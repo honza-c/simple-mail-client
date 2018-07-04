@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml sql
+QT       += core gui xml network sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,7 +37,6 @@ SOURCES += \
     userAccounts/xmluseraccountsreaderwriter.cpp \
     tools/ipasswordencryptordecryptor.cpp \
     tools/aespasswordencryptordecryptor.cpp \
-    messaging/vmimerootcertificateshelper.cpp \
     messaging/mailmessage.cpp \
     messaging/abstractmessagesenderservice.cpp \
     messaging/messagemetadata.cpp \
@@ -67,7 +66,6 @@ SOURCES += \
     messaging/vmimemessagecontentparser.cpp \
     messaging/vmimemessagemetadataparser.cpp \
     messaging/vmimemessagingbaseservice.cpp \
-    messaging/vmimerootcertificateshelper.cpp \
     messaging/vmimesmtpservice.cpp \
     tools/aespasswordencryptordecryptor.cpp \
     tools/ipasswordencryptordecryptor.cpp \
@@ -93,7 +91,6 @@ HEADERS += \
     userAccounts/xmluseraccountsreaderwriter.h \
     tools/ipasswordencryptordecryptor.h \
     tools/aespasswordencryptordecryptor.h \
-    messaging/vmimerootcertificateshelper.h \
     messaging/mailmessage.h \
     messaging/abstractmessagesenderservice.h \
     messaging/messagemetadata.h \
@@ -123,7 +120,6 @@ HEADERS += \
     messaging/vmimemessagecontentparser.h \
     messaging/vmimemessagemetadataparser.h \
     messaging/vmimemessagingbaseservice.h \
-    messaging/vmimerootcertificateshelper.h \
     messaging/vmimesmtpservice.h \
     tools/aespasswordencryptordecryptor.h \
     tools/constants.h \
