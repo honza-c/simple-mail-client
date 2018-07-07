@@ -76,7 +76,8 @@ SOURCES += \
     userAccounts/xmluseraccountsreaderwriter.cpp \
     mailclientcore.cpp \
     database/databasemanager.cpp \
-    src/newuseraccount.cpp
+    src/newuseraccount.cpp \
+    src/newuseraccountslistmodel.cpp
 
 HEADERS += \
         mailclientcore.h \
@@ -132,7 +133,8 @@ HEADERS += \
     userAccounts/xmluseraccountsreaderwriter.h \
     mailclientcore.h \
     database/databasemanager.h \
-    src/newuseraccount.h
+    src/newuseraccount.h \
+    src/newuseraccountslistmodel.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
