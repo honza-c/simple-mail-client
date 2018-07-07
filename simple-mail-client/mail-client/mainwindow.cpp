@@ -14,6 +14,23 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeAndInstallWidgets();
 
 
+    NewUserAccount testAccount;
+    testAccount.setAccountName("Můj testovací účet");
+    testAccount.setUserName("Jan Čulík");
+    testAccount.setEmailAddress("jan@culik.net");
+    testAccount.setPassword("pass");
+    testAccount.setSmtpServerUrl("smtp://foo");
+    testAccount.setSmtpServerPort(666);
+    testAccount.setIncomingServerType(NewUserAccount::IMAP);
+    testAccount.setIncomingServerAddress("imaps://bar");
+    testAccount.setIncomingServerPort(999);
+
+    qWarning() << testAccount;
+
+    QList<NewUserAccount> testList;
+    testList << testAccount;
+
+    qWarning() << "V seznamu je " << testList.size() << " prvku.";
 }
 
 MainWindow::~MainWindow()

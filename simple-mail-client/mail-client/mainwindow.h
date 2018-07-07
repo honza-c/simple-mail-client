@@ -20,6 +20,8 @@
 #include "messaging/inboxfolder.h"
 #include "database/databasemanager.h"
 
+#include "src/newuseraccount.h"
+
 namespace Ui {
 class MainWindow;
 }
