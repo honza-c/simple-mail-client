@@ -27,114 +27,70 @@ LIBS += -lvmime -lcryptopp
 
 SOURCES += \
         mailclientcore.cpp \
-        userAccounts/useraccount.cpp \
-        userAccounts/useraccountslistmodel.cpp \
-    userAccounts/useraccount.cpp \
-    userAccounts/useraccountslistmodel.cpp \
     mailclientcore.cpp \
-    tools/utils.cpp \
-    userAccounts/iuseraccountsreaderwriter.cpp \
-    userAccounts/xmluseraccountsreaderwriter.cpp \
-    tools/ipasswordencryptordecryptor.cpp \
-    tools/aespasswordencryptordecryptor.cpp \
-    messaging/mailmessage.cpp \
-    messaging/abstractmessagesenderservice.cpp \
-    messaging/messagemetadata.cpp \
-    messaging/vmimemessagemetadataparser.cpp \
-    messaging/messagemetadatatablemodel.cpp \
-    messaging/vmimemessagingbaseservice.cpp \
-    messaging/vmimesmtpservice.cpp \
-    messaging/abstractinboxservice.cpp \
-    messaging/vmimeinboxservice.cpp \
-    messaging/vmimeimapservice.cpp \
-    messaging/inboxfoldertreeitem.cpp \
-    messaging/inboxfoldertreemodel.cpp \
-    messaging/inboxfolder.cpp \
-    messaging/vmimeinboxfolderparser.cpp \
-    messaging/vmimemessagecontentparser.cpp \
-    messaging/abstractinboxservice.cpp \
-    messaging/abstractmessagesenderservice.cpp \
-    messaging/inboxfolder.cpp \
-    messaging/inboxfoldertreeitem.cpp \
-    messaging/inboxfoldertreemodel.cpp \
-    messaging/mailmessage.cpp \
-    messaging/messagemetadata.cpp \
-    messaging/messagemetadatatablemodel.cpp \
-    messaging/vmimeimapservice.cpp \
-    messaging/vmimeinboxfolderparser.cpp \
-    messaging/vmimeinboxservice.cpp \
-    messaging/vmimemessagecontentparser.cpp \
-    messaging/vmimemessagemetadataparser.cpp \
-    messaging/vmimemessagingbaseservice.cpp \
-    messaging/vmimesmtpservice.cpp \
-    tools/aespasswordencryptordecryptor.cpp \
-    tools/ipasswordencryptordecryptor.cpp \
-    tools/utils.cpp \
-    userAccounts/iuseraccountsreaderwriter.cpp \
-    userAccounts/useraccount.cpp \
-    userAccounts/useraccountslistmodel.cpp \
-    userAccounts/xmluseraccountsreaderwriter.cpp \
     mailclientcore.cpp \
-    database/databasemanager.cpp \
-    src/newuseraccount.cpp \
-    src/newuseraccountslistmodel.cpp
+    src/vmimebasemessagingservice.cpp \
+    src/vmimeinboxservice.cpp \
+    src/vmimeimapservice.cpp \
+    src/vmimeinboxfolder.cpp \
+    src/vmimeinboxfolderparser.cpp \
+    src/vmimemessagecontentparser.cpp \
+    src/messagemetadata.cpp \
+    src/contact.cpp \
+    src/vmimemessagemetadataparser.cpp \
+    src/inboxfoldertreeitem.cpp \
+    src/inboxfoldertreemodel.cpp \
+    src/databasemanager.cpp \
+    src/messagemetadatasqltablemodel.cpp \
+    src/attachment.cpp \
+    src/qpushbuttonwithid.cpp \
+    src/xmluseraccountsreaderwriter.cpp \
+    src/aesencryptordecryptor.cpp \
+    src/inboxfolder.cpp \
+    src/message.cpp \
+    src/vmimesmtpservice.cpp \
+    src/messagecontent.cpp \
+    src/multiselectcompleter.cpp \
+    src/logger.cpp \
+    src/useraccount.cpp \
+    src/useraccountslistmodel.cpp \
+    src/vmimepop3service.cpp \
+    embeddedobject.cpp
 
 HEADERS += \
         mailclientcore.h \
-        userAccounts/useraccount.h \
-        userAccounts/useraccountslistmodel.h \
-    userAccounts/useraccount.h \
-    userAccounts/useraccountslistmodel.h \
     mailclientcore.h \
-    tools/utils.h \
     tools/constants.h \
     userAccounts/usersettingswriterandloader.h \
-    userAccounts/iuseraccountsreaderwriter.h \
-    userAccounts/xmluseraccountsreaderwriter.h \
-    tools/ipasswordencryptordecryptor.h \
-    tools/aespasswordencryptordecryptor.h \
-    messaging/mailmessage.h \
-    messaging/abstractmessagesenderservice.h \
-    messaging/messagemetadata.h \
-    messaging/vmimemessagemetadataparser.h \
-    messaging/messagemetadatatablemodel.h \
-    messaging/vmimemessagingbaseservice.h \
-    messaging/vmimesmtpservice.h \
-    messaging/abstractinboxservice.h \
-    messaging/vmimeinboxservice.h \
-    messaging/vmimeimapservice.h \
-    messaging/inboxfoldertreeitem.h \
-    messaging/inboxfoldertreemodel.h \
-    messaging/inboxfolder.h \
-    messaging/vmimeinboxfolderparser.h \
-    messaging/vmimemessagecontentparser.h \
-    messaging/abstractinboxservice.h \
-    messaging/abstractmessagesenderservice.h \
-    messaging/inboxfolder.h \
-    messaging/inboxfoldertreeitem.h \
-    messaging/inboxfoldertreemodel.h \
-    messaging/mailmessage.h \
-    messaging/messagemetadata.h \
-    messaging/messagemetadatatablemodel.h \
-    messaging/vmimeimapservice.h \
-    messaging/vmimeinboxfolderparser.h \
-    messaging/vmimeinboxservice.h \
-    messaging/vmimemessagecontentparser.h \
-    messaging/vmimemessagemetadataparser.h \
-    messaging/vmimemessagingbaseservice.h \
-    messaging/vmimesmtpservice.h \
-    tools/aespasswordencryptordecryptor.h \
     tools/constants.h \
-    tools/ipasswordencryptordecryptor.h \
-    tools/utils.h \
-    userAccounts/iuseraccountsreaderwriter.h \
-    userAccounts/useraccount.h \
-    userAccounts/useraccountslistmodel.h \
-    userAccounts/xmluseraccountsreaderwriter.h \
     mailclientcore.h \
-    database/databasemanager.h \
-    src/newuseraccount.h \
-    src/newuseraccountslistmodel.h
+    src/vmimebasemessagingservice.h \
+    src/vmimeinboxservice.h \
+    src/vmimeimapservice.h \
+    src/vmimeinboxfolder.h \
+    src/vmimeinboxfolderparser.h \
+    src/vmimemessagecontentparser.h \
+    src/messagemetadata.h \
+    src/contact.h \
+    src/vmimemessagemetadataparser.h \
+    src/inboxfoldertreeitem.h \
+    src/inboxfoldertreemodel.h \
+    src/databasemanager.h \
+    src/messagemetadatasqltablemodel.h \
+    src/attachment.h \
+    src/qpushbuttonwithid.h \
+    src/xmluseraccountsreaderwriter.h \
+    src/aesencryptordecryptor.h \
+    src/inboxfolder.h \
+    src/message.h \
+    src/vmimesmtpservice.h \
+    src/messagecontent.h \
+    src/multiselectcompleter.h \
+    src/logger.h \
+    src/useraccount.h \
+    src/useraccountslistmodel.h \
+    src/vmimepop3service.h \
+    embeddedobject.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
