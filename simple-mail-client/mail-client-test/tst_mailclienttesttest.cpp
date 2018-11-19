@@ -1,6 +1,5 @@
 #include <QString>
 #include <QtTest>
-#include <userAccounts/useraccount.h>
 
 class MailClientTestTest : public QObject
 {

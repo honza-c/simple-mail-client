@@ -26,23 +26,32 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    manageaccountsdialog.cpp \
-    edituseraccountdialog.cpp \
+    addedituseraccountdialog.cpp \
+    manageuseracccountsdialog.cpp \
     writemessagewindow.cpp \
+    attachmentslistmodel.cpp \
+    newfolderdialog.cpp \
+    renamefolderdialog.cpp
 
 
 HEADERS += \
         mainwindow.h \
-    manageaccountsdialog.h \
-    edituseraccountdialog.h \
+    constants.h \
+    addedituseraccountdialog.h \
+    manageuseracccountsdialog.h \
     writemessagewindow.h \
+    attachmentslistmodel.h \
+    newfolderdialog.h \
+    renamefolderdialog.h
 
 
 FORMS += \
         mainwindow.ui \
-    manageaccountsdialog.ui \
-    edituseraccountdialog.ui \
-    writemessagewindow.ui
+    addedituseraccountdialog.ui \
+    manageuseracccountsdialog.ui \
+    writemessagewindow.ui \
+    newfolderdialog.ui \
+    renamefolderdialog.ui
 
 INCLUDEPATH += $$PWD/../mail-client-core
 LIBS += -L$$OUT_PWD/../mail-client-core/ -lmail-client-core

@@ -1,30 +1,55 @@
-# Simple Mail Client & Mail Client Core
-This repository contains `mail-client-core`, a simple Qt/C++ library providing the core functionality of an e-mail client. The second part of this repository is `simple-mail-client`, a simple Qt/C++ GUI application, that integrates the `mail-client-core` library. Purpose of this application is to display how to integrate and use the library in your project. The final goal is to use `mail-client-core` library as backend for e-mail plugin to Otter Browser, which is also goal of my bachelor thesis.
+# Simple Mail Client
+This repository contains `simple-mail-client`, a simple Qt/C++ GUI application for reading and writing e-mail messages. The final goal is to use this prototype as e-mail plugin to Otter Browser, which is also goal of my bachelor thesis. Application is tested on Linux operating system, there is not used any platform dependent code, so the program should work on MS Windows and Mac OS X too.
 
-Current temporary limitation is that library works only on GNU/Linux operating systems: Support for Debian-based distributions (Ubuntu, Debian, Mint, ...) and Red Hat-based distributions (RHEL, CentOS, Fedora, ...) is done. Support for MS Windows and Mac OS X is planned.
 
-![screenshot](https://files.culik.net/simple-mail-client.png "screenshot")
+![screenshot](https://files.culik.net/simple-mail-client-1.png "screenshot")
+![screenshot](https://files.culik.net/simple-mail-client-2.png "screenshot")
+![screenshot](https://files.culik.net/simple-mail-client-3.png "screenshot")
 
+## Basic features
+- Support for multiple e-mail accounts via POP3 and IMAP protocols: displaying messages accross folders, fulltext search
+- Sending (replying, forwarding) messages via SMTP protocol
+- All program data is stored in SQLite database (except user accounts cofiguration, which is stored in XML file)
+- All network requests are executed in threads
+- Downloading and sending attachments
+- Displaying embedded objects content in HTML messages
+- Notifications about unread messages in window title and folder tree view + messagebox, when a new message is received
+
+## What needs to be done
+- Support for moving, copying and deleting messages (GUI is done)
+- Support for creating and deleting folders (GUI is done)
+- tags
+- drafts
+- error handling
+- refactoring
+- bugfixing
 
 ## Dependencies
-`mail-client-core` uses this list of external components and libraries:
+List of external components and libraries:
 - Qt framework
 - VMime: C++ library providing the interface to e-mail protocols
 - Crypto++: C++ library for encryption / decryption, here used for encrypted storing user passwords in the configuration file.
 
 ## Install dependencies on Fedora Linux
-- install Qt framework
+- Install C/C++ development tools, sendmail, OpenSSL, SASL and TLS libraries:
+```
+sudo dnf install cmake? libgsasl libgsasl-devel gnutls-devel openssl-devel sendmail
+sudo dnf install @development-tools
+sudo dnf group install "C Development Tools and Libraries"
+```
+
+- install Qt framework:
+```
+sudo dnf install qt5*-devel
+sudo dnf install qt-creator
+```
+
 - install Crypto++ library:
 
 ```
 sudo dnf install cryptopp cryptopp-devel
 ```
-- install C/C++ development tools:
 
-```
-sudo dnf install @development-tools
-sudo dnf group install "C Development Tools and Libraries"
-```
 - Download and install newest stable version of vmime library:
 
 ```
@@ -42,7 +67,7 @@ sudo ldconfig /usr/local/lib64
 TODO
 
 ## Chaning constant values before the build
-In `simple-mail-client/mail-client-core/tools/constants.h` file are placed some constant values you may want to change before the build:
+In `simple-mail-client/mail-client/constants.h` file are placed some constant values you may want to change before the build:
 ```
     // filename constants for files used in application
     const QString ERROR_LOG_FILE_NAME = "error.log";
@@ -58,7 +83,7 @@ In `simple-mail-client/mail-client-core/tools/constants.h` file are placed some 
 - `DATABASE_FILE_NAME` is the name of the .sqlite file, where is the database data stored.
 - `PASSWORD_AES_CBC_ENCRYPTION_KEY` and `PASSWORD_AES_CBC_ENCRYPTION_IV` are the vaules that are used for encrypting and decrypting the user passwords, that are stored in the `USER_ACCOUNT_SETTINGS_FILE`. It is strongly recommended to change default values before the build.
 
-In `simple-mail-client/mail-client-core/tools/utils.cpp` is function to handle logging. Default behavior is that every log level information is printed into `std::err` stream and information with `Critical` and `Fatal` log levels are stored in `ERROR_LOG_FILE_NAME` file. You may want to change the behavior of the logger:
+In `simple-mail-client/mail-client-core/src/logger.cpp` is function to handle logging. Default behavior is that every log level information is printed into `std::err` stream and information with `Critical` and `Fatal` log levels are stored in `ERROR_LOG_FILE_NAME` file. You may want to change the behavior of the logger:
 
 ```
 void Tools::Utils::customLogMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -101,11 +126,11 @@ void Tools::Utils::customLogMessageHandler(QtMsgType type, const QMessageLogCont
 }
 ```
 
-## Build mail-client-core library on Linux
+## Build Simple Mail Client on Linux
 Path to `qmake` binary may differ on your system. In my case I have Qt framework from official installer installed in /opt directory and I use 5.10.1 version. If you use Qt framework from packages provided by your distribution, calling just `qmake` without the absolute path should be good enough.
 
 ```bash
-git clone https://gitlab.com/honza-c/simple-mail-client
+git clone https://github.com/honza-c/simple-mail-client
 mkdir simple-mail-client/build
 cd simple-mail-client/build
 /opt/Qt/5.10.1/gcc_64/bin/qmake ../simple-mail-client/simple-mail-client.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug && /usr/bin/make qmake_all
@@ -116,14 +141,3 @@ or open `simple-mail-client/simple-mail-client.pro` in QtCreator and hit the run
 ## Location of build artefacts
 - Location of static library `mail-client-core` is `build/mail-client-core/libmailclient-core.a`.
 - Location of `simple-mail-client` application is `build/mail-client/mail-client`
-
-## Integration of mail-client-core to other Qt project
-Add those lines to your .pro file:
-```
-INCLUDEPATH += $$PWD/path-to-mail-client-core-subproject
-LIBS += -L$$PWD/path-where-is-built-library-file-placed -lmail-client-core
-LIBS += -lcryptopp
-LIBS += -lvmime
-```
-- Location in the first line must point to the sources of the mail-client-core subproject in this repo to proper use the headers provided by the library.
-- Location in the second line must point to path where built `libmail-client-core.a` is located.

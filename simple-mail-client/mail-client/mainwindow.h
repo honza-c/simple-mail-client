@@ -2,23 +2,26 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <userAccounts/useraccount.h>
 #include <QDebug>
 #include <QtWidgets>
 #include <QWebEngineView>
-#include "manageaccountsdialog.h"
+
+#include "src/databasemanager.h"
+#include "src/useraccount.h"
+#include "src/inboxfoldertreemodel.h"
+#include "src/messagemetadatasqltablemodel.h"
+#include "src/attachment.h"
+#include "src/qpushbuttonwithid.h"
+#include "src/xmluseraccountsreaderwriter.h"
+#include "src/useraccountslistmodel.h"
+
+//#include "constants.h"
+
+#include "manageuseracccountsdialog.h"
 #include "writemessagewindow.h"
-#include "tools/constants.h"
-#include "userAccounts/xmluseraccountsreaderwriter.h"
-#include "userAccounts/iuseraccountsreaderwriter.h"
-#include <userAccounts/useraccountslistmodel.h>
-#include "messaging/messagemetadata.h"
-#include "messaging/vmimeimapservice.h"
-#include "messaging/vmimeinboxservice.h"
-#include "messaging/messagemetadatatablemodel.h"
-#include "messaging/inboxfoldertreemodel.h"
-#include "messaging/inboxfolder.h"
-#include "database/databasemanager.h"
+#include "newfolderdialog.h"
+#include "renamefolderdialog.h"
+#include "embeddedobject.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,65 +32,121 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     void on_actionAccount_Settings_triggered();
     void on_actionNew_Message_triggered();
+    void changeMessageMetadataTableFilter(const QString input);
+    void folderTreeViewSelectionChanged(const QModelIndex &, const QModelIndex &);
+    void messageMetadataTableViewSelectionChanged(const QModelIndex &, const QModelIndex &);
+    void onAttachmentButtonClicked(bool);
+    void userAcccountsConfigurationChanged();
+
+    void onBtnReplyClicked(bool);
+    void onBtnReplyAllClicked(bool);
+    void onBtnForwardClicked(bool);
+
+    void inboxStructureChanged();
+    void messageContentFetched(int);
+    void newMessagesReceived(QString, int);
+    void messageMetadataTableViewContextMenuRequested(QPoint);
+    void folderTreeViewContextMenuRequested(QPoint);
+
+    void deleteMessageActionTriggered(bool);
+    void moveMessageActionTriggered(bool);
+    void copyMessageActionTriggered(bool);
+
+    void createNewFolderActionTriggered(bool);
+    void createNewSubfolderActionTriggered(bool);
+    void deleteFolderActionTriggered(bool);
+    void renameFolderActionTriggered(bool);
+
+    void onBtnWriteMessageClicked(bool);
+    void onBtnGetMessagesClicked(bool);
+
+    void onBtnArchiveClicked(bool);
+    void onBtnDeleteMessageClicked(bool);
 
 private:
     void initializeDataStructures();
     void initializeUserAccounts();
-    void initializeInboxMetadata();
-    void initializeInboxFolders();
     void initializeDataModels();
     void initializeApplicationWindows();
     void initializeAndInstallWidgets();
     void initializeWidgetsAndLayouts();
     void installLayouts();
+    void expandAllNodesInFolderTreeView();
+    void cleanUnusedDataFromDatabase();
+    void showMessageContent(int messageId);
+    void updateWindowTitle();
+    void updateMessageMetadataTableFilter(QModelIndex currentIndex, QString filterText);
+    QString getEmailAddressFromFolderTreeItemIndex(QModelIndex currentIndex);
+    QString getFolderPathFromFolderTreeItemIndex(QModelIndex currentIndex);
+    QString getFullFolderPathFromFolderTreeItemIndex(QModelIndex currentIndex);
+    void updateFolderTreeModel();
+    void setupAttachmentsPanel(const QList<Attachment> attachments);
+    void deleteOldAttachmentsLayout(QLayout *layout);
+    QHBoxLayout *createAttachmentsLayout(QString caption, QList<Attachment> attachments);
+    Message getMessage(int messageId) const;
 
     Ui::MainWindow *ui;
 
-    QList<UserAccount> *userAccountsList;
-    QList<VmimeInboxService*> *inboxesList;
-    QList<QList<InboxFolder>> *inboxesFolderList;
-    QList<QList<MessageMetadata>> *inboxesMessageMetadataList;
+    // data structures
+    DatabaseManager *m_databaseManager;
+    QList<UserAccount> *m_userAccountsList;
 
-    DatabaseManager *dbManager;
+    // widgets and layouts
+    UserAccountsListModel *m_userAccountsListModel;
+    InboxFolderTreeModel *m_inboxFolderTreeModel;
+    MessageMetadataSqlTableModel *m_messageMetadataSqlTableModel;
 
-    UserAccountsListModel *userAccountsListModel;
-    InboxFolderTreeModel *inboxFolderTreeModel;
-    MessageMetadataTableModel *messageMetadataTableModel;
+    QSplitter *m_mainHorizontalSplitter;
+    QLineEdit *m_editMessageMetadataFilter;
+    QTableView *m_messagesMetadataTableView;
+    QTreeView *m_inboxFolderTreeView;
 
-    QSplitter *mainHorizontalSplitter;
-    QTableView *messagesMetadataTableView;
-    QTreeView *inboxFolderTreeView;
+    QVBoxLayout *m_messageMetadataHBoxLayout;
+    QWidget *m_messageMetadataWidget;
 
-    QHBoxLayout *attachmentsLayout;
-    QPushButton *btnAttachment1;
-    QPushButton *btnAttachment2;
-    QPushButton *btnAttachment3;
-    QLabel *lblAttachments;
+    QHBoxLayout *m_msgActionsLayout;
+    QPushButton *m_btnArchive;
+    QPushButton *m_btnJunk;
+    QPushButton *m_btnDelete;
+    QPushButton *m_btnReply;
+    QPushButton *m_btnReplyAll;
+    QPushButton *m_btnForward;
 
-    QHBoxLayout *msgActionsLayout;
-    QPushButton *btnReply;
-    QPushButton *btnReplyToAll;
-    QPushButton *btnForward;
+    QWidget *m_msgInfoWidget;
+    QVBoxLayout *m_msgInfoLayout;
+    QLabel *m_lblFrom;
+    QLabel *m_lblSubject;
+    QLabel *m_lblTo;
+    QLabel *m_lblInCopy;
+    QLabel *m_lblReplyTo;
 
-    QHBoxLayout *msgButtonsLayout;
-    QWebEngineView *msgContentView;
-    QSplitter *messageDataSplitter;
+    QWidget *m_msgButtonsWidget;
+    QHBoxLayout *m_msgButtonsLayout;
+    QWebEngineView *m_msgContentView;
+    QSplitter *m_messageDataSplitter;
 
-    QVBoxLayout *msgButtonsAndContentLayout;
+    QVBoxLayout *m_msgButtonsAndContentLayout;
 
-    QWidget *attachmentsWidget;
-    QWidget *msgActionsWidget;
-    QWidget *msgAttachmentsAndActionsWidget;
-    QWidget *msgButtonsAndContentWidget;
+    QWidget *m_msgActionsWidget;
+    QWidget *m_msgAttachmentsAndActionsWidget;
+    QHBoxLayout *m_msgAttachmentsAndActionsLayout;
+    QWidget *m_msgButtonsAndContentWidget;
 
-    ManageAccountsDialog *manageAccountsDialog;
-    WriteMessageWindow *writeMessageWindow;
+    QWidget *m_attachmentsWidget;
+
+    int m_currentMessageId;
+    int m_unreadMessagesCount;
+
+    ManageUserAcccountsDialog *m_manageUserAccountsDialog;
+
+    QPushButton *m_btnGetMessages;
+    QPushButton *m_btnWriteMessage;
 };
 
 #endif // MAINWINDOW_H
